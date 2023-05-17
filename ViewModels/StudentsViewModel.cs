@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
 using UniversityDBExplorer.Special.Mediator;
+using UniversityDBExplorer.Views;
 
 namespace UniversityDBExplorer.ViewModels;
 
@@ -13,6 +14,7 @@ public class StudentsViewModel : INotifyPropertyChanged
     private GroupModel group;
     private StudentModel selectedStudent;
     private RelayCommand addNewStudent;
+    private RelayCommand removeStudent;
     private Mediator mediator { get; set; }
     public GroupModel Group
     {
@@ -52,10 +54,28 @@ public class StudentsViewModel : INotifyPropertyChanged
                 Group.Student?.Add(st);
                 BaseViewModel.db.Students.Add(st);
                 BaseViewModel.db.SaveChanges();
-            });
+            }, obj=>group!=null);
         }
     }
+   
+    public RelayCommand RemoveStudent
+    {
+        get
+        {
+            return removeStudent ??= new RelayCommand(obj =>
+            {
+                if (obj is not StudentModel std) return;
+                group.Student.Remove(std);
+                //SearchedStudents = group.Student;
+                BaseViewModel.db.Students.Remove(std);
+                BaseViewModel.db.SaveChanges();
 
+
+                if (group.Student?.Count > 0)
+                    SelectedStudent = group.Student[^1];
+            }, obj => group is { Student.Count: > 0 });
+        }
+    } 
     private void OnGroupChange(GroupModel group) => Group = group;
     public StudentsViewModel(Mediator mediator)
     {

@@ -42,8 +42,9 @@ public class GroupsViewModel : INotifyPropertyChanged
         {
             selectedGroup = value;
             OnPropertyChanged();
-            if (SelectedGroup.Student == null)
-                SelectedGroup.Student = new ObservableCollection<StudentModel>();
+            if (selectedGroup != null)
+                if (SelectedGroup.Student == null)
+                    SelectedGroup.Student = new ObservableCollection<StudentModel>();
             mediator.OnGroupChange(SelectedGroup);
         }
     }
@@ -62,14 +63,19 @@ public class GroupsViewModel : INotifyPropertyChanged
                     StarostaName = "ФИО",
                     Starosta = new StudentModel
                     {
-                        Name = "Олег Олегович Олежко", Flu = "нет", Location = "СПБ", Mail = "student@etu.ru",
-                        PhoneNumber = "+79211528982", Status = "Нормально", StudBiletNumber = 830537
+                        Name = "Олег Олегович Олежко",
+                        Flu = "нет",
+                        Location = "СПБ",
+                        Mail = "student@etu.ru",
+                        PhoneNumber = "+79211528982",
+                        Status = "Нормально",
+                        StudBiletNumber = 830537
                     }
                 };
                 Cafedra.Groups?.Add(gr);
                 BaseViewModel.db.Groups.Add(gr);
                 BaseViewModel.db.SaveChanges();
-            });
+            }, obj => Cafedra != null);
         }
     }
     public RelayCommand RemoveGroup

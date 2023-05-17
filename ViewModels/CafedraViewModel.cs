@@ -37,8 +37,9 @@ public class CafedraViewModel : INotifyPropertyChanged
         {
             selectedCafedra = value;
             OnPropertyChanged();
-            if (SelectedCafedra?.Groups == null)
-                SelectedCafedra.Groups = new ObservableCollection<GroupModel>();
+            if(selectedCafedra != null)
+                if (SelectedCafedra?.Groups == null)
+                    SelectedCafedra.Groups = new ObservableCollection<GroupModel>();
             mediator.OnCafedraChange(SelectedCafedra);
         }
     }
@@ -57,13 +58,19 @@ public class CafedraViewModel : INotifyPropertyChanged
             {
                 var caf = new CafedraModel
                 {
-                    Title = $"Новый кафедра", ZavName = "Зав", ZavSurname = "Завов", ZavFathername = "Завович",
-                    Groups = new ObservableCollection<GroupModel>(), Mail = "Zac@etu.ru", PhoneNumber = "+79999999999", RoomNumber = 1234
+                    Title = $"Новый кафедра",
+                    ZavName = "Зав",
+                    ZavSurname = "Завов",
+                    ZavFathername = "Завович",
+                    Groups = new ObservableCollection<GroupModel>(),
+                    Mail = "Zac@etu.ru",
+                    PhoneNumber = "+79999999999",
+                    RoomNumber = 1234
                 };
                 Facultet.Cafedra?.Add(caf);
                 BaseViewModel.db.Cafedras.Add(caf);
                 BaseViewModel.db.SaveChanges();
-            });
+            }, obj => Facultet != null);
         }
     }
 

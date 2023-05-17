@@ -32,8 +32,9 @@ public class FacultetsViewModel : INotifyPropertyChanged
         {
             selectedFacultet = value;
             OnPropertyChanged();
-            if (SelectedFacultet.Cafedra == null)
-                SelectedFacultet.Cafedra = new ObservableCollection<CafedraModel>();
+            if(SelectedFacultet != null)
+                if (SelectedFacultet.Cafedra == null)
+                    SelectedFacultet.Cafedra = new ObservableCollection<CafedraModel>();
             mediator.OnFacultetChanged(SelectedFacultet);
         }
     }
@@ -74,7 +75,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
 
                 if (Facultets?.Count > 0)
                     SelectedFacultet = Facultets[^1];
-            }, obj => Facultets is { Count: > 0 });
+            }, () => (Facultets.Count > 0 && selectedFacultet!=null));
         }
     }
     
