@@ -59,6 +59,7 @@ public class StudentsViewModel : INotifyPropertyChanged
                     StudBiletNumber=830537
                 };
                 Group.Student?.Add(st);
+                SearchedStudents = group.Student;
                 BaseViewModel.db.Students.Add(st);
                 BaseViewModel.db.SaveChanges();
             }, obj=>group!=null);

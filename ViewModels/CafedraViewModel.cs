@@ -64,6 +64,7 @@ public class CafedraViewModel : INotifyPropertyChanged
                     RoomNumber = 1234
                 };
                 Facultet.Cafedra?.Add(caf);
+                SearchedCafedras = facultet.Cafedra;
                 BaseViewModel.db.Cafedras.Add(caf);
                 BaseViewModel.db.SaveChanges();
             }, obj => Facultet != null);
@@ -78,6 +79,7 @@ public class CafedraViewModel : INotifyPropertyChanged
              {
                  if (obj is not CafedraModel caf) return;
                  Facultet.Cafedra?.Remove(caf);
+                 SearchedCafedras = facultet.Cafedra;
                  BaseViewModel.db.Cafedras.Remove(caf);
                  BaseViewModel.db.SaveChanges();
                      

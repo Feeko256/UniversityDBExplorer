@@ -78,6 +78,7 @@ public class GroupsViewModel : INotifyPropertyChanged
                     }
                 };
                 Cafedra.Groups?.Add(gr);
+                SearchedGroups = cafedra.Groups;
                 BaseViewModel.db.Groups.Add(gr);
                 BaseViewModel.db.SaveChanges();
             }, obj => Cafedra != null);
@@ -93,7 +94,7 @@ public class GroupsViewModel : INotifyPropertyChanged
                 Cafedra.Groups?.Remove(group);
                 BaseViewModel.db.Groups.Remove(group);
                 BaseViewModel.db.SaveChanges();
-                    
+                SearchedGroups = cafedra.Groups;
                 DbOperations.RemoveStudents();
  
                 if (Cafedra.Groups?.Count > 0)
