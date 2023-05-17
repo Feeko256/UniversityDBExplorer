@@ -1,0 +1,36 @@
+﻿<fw:AcrylicWindow x:Class="UniversityDBExplorer.Views.MainWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  xmlns:viewModel="clr-namespace:UniversityDBExplorer.ViewModels"
+                  xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+                  mc:Ignorable="d"
+                  Height="570" Width="980" MinHeight="570" MinWidth="980">
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction d:DataContext="{d:DesignInstance Type=viewModel:MainViewModel}"
+                                   Command="{Binding UpdateFacultets}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <TabControl>
+            <TabItem Header="Факультеты">
+                <ContentControl Content="{Binding Facultets}" />
+            </TabItem>
+            <TabItem Header="Кафедры">
+                <ContentControl Content="{Binding  Cafedras}" />
+            </TabItem>
+            <TabItem Header="Группы">
+                <ContentControl Content="{Binding  Groups}" />
+            </TabItem>
+            <TabItem Header="Студенты">
+                <ContentControl Content="{Binding  Students}" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</fw:AcrylicWindow>
