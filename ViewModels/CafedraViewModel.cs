@@ -7,6 +7,7 @@ using System.Windows;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
 using UniversityDBExplorer.Special.Mediator;
+using UniversityDBExplorer.Views;
 
 namespace UniversityDBExplorer.ViewModels;
 
@@ -90,7 +91,7 @@ public class CafedraViewModel : INotifyPropertyChanged
  
                  if (Facultet.Cafedra?.Count > 0)
                      SelectedCafedra = Facultet.Cafedra[^1];
-             }, obj => Facultet is { Cafedra.Count: > 0 });
+             }, (obj) => Facultet?.Cafedra?.Count > 0 && selectedCafedra != null);
          }
      }
     public event PropertyChangedEventHandler? PropertyChanged;

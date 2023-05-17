@@ -75,7 +75,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
 
                 if (Facultets?.Count > 0)
                     SelectedFacultet = Facultets[^1];
-            }, () => (Facultets.Count > 0 && selectedFacultet!=null));
+            }, (obj) => (Facultets.Count > 0 && selectedFacultet!=null));
         }
     }
     

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
 using UniversityDBExplorer.Special.Mediator;
+using UniversityDBExplorer.Views;
 
 namespace UniversityDBExplorer.ViewModels;
 
@@ -94,7 +95,7 @@ public class GroupsViewModel : INotifyPropertyChanged
                 if (Cafedra.Groups?.Count > 0)
                     SelectedGroup = Cafedra.Groups[^1];
 
-            }, obj => Cafedra is { Groups.Count: > 0 });
+            }, (obj) => (Cafedra?.Groups?.Count > 0 && selectedGroup != null));
         }
     }
     private void OnCafedraChange(CafedraModel cafedra) => Cafedra = cafedra;

@@ -73,7 +73,7 @@ public class StudentsViewModel : INotifyPropertyChanged
 
                 if (group.Student?.Count > 0)
                     SelectedStudent = group.Student[^1];
-            }, obj => group is { Student.Count: > 0 });
+            }, (obj) => (group?.Student.Count > 0 && selectedStudent != null));
         }
     } 
     private void OnGroupChange(GroupModel group) => Group = group;
