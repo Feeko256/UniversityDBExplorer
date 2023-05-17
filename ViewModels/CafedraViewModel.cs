@@ -14,22 +14,12 @@ namespace UniversityDBExplorer.ViewModels;
 public class CafedraViewModel : INotifyPropertyChanged
 {
     private FacultetModel facultet;
-
-    public FacultetModel Facultet
-    {
-        get { return facultet; }
-        set
-        {
-            facultet = value;
-            OnPropertyChanged("Facultet");
-        }
-    }
-
-    public ObservableCollection<CafedraModel> Cafedras { get; set; }
-  
+    private ObservableCollection<CafedraModel> searchedCafedras;
     private CafedraModel? selectedCafedra;
     private RelayCommand addNewCafedra;
     private RelayCommand removeCafedra;
+    private RelayCommand searchCafCommand;
+    private string searchCafedras;
     private Mediator mediator { get; set; }
     public CafedraModel? SelectedCafedra
     {
@@ -49,8 +39,13 @@ public class CafedraViewModel : INotifyPropertyChanged
     {
         this.mediator = mediator;
         this.mediator.FacultetChange += OnFacultetChanged;
+        
     }
-    private void OnFacultetChanged(FacultetModel facultet) => Facultet = facultet;
+    private void OnFacultetChanged(FacultetModel facultet)
+    {
+        Facultet = facultet;
+        SearchedCafedras = facultet.Cafedra;
+    }
     public RelayCommand AddNewCafedra
     {
         get
@@ -94,6 +89,56 @@ public class CafedraViewModel : INotifyPropertyChanged
              }, (obj) => Facultet?.Cafedra?.Count > 0 && selectedCafedra != null);
          }
      }
+
+
+
+    public ObservableCollection<CafedraModel> SearchedCafedras
+    {
+        get { return searchedCafedras; }
+        set
+        {
+            searchedCafedras = value;
+            OnPropertyChanged("SearchedCafedras");
+        }
+    }
+    public string SearchCafedras
+    {
+        get { return searchCafedras; }
+        set { searchCafedras = value; OnPropertyChanged("SearchCafedras"); }
+    }
+    private void SearchCaf()
+    {
+        if (string.IsNullOrWhiteSpace(SearchCafedras))
+        {
+            SearchedCafedras = new ObservableCollection<CafedraModel>(Facultet.Cafedra);
+        }
+        else
+        {
+            SearchedCafedras = new ObservableCollection<CafedraModel>(Facultet.Cafedra.Where(f => f.Title.Contains(SearchCafedras, StringComparison.OrdinalIgnoreCase)));
+        }
+    }
+    public RelayCommand SearchCafCommand
+    {
+        get
+        {
+            return searchCafCommand ??= new RelayCommand(obj =>
+            {
+                SearchCaf();
+            });
+        }
+    }
+
+    public FacultetModel Facultet
+    {
+        get { return facultet; }
+        set
+        {
+            facultet = value;
+            OnPropertyChanged("Facultet");
+        }
+    }
+
+
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string prop = "")
     {

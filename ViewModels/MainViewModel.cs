@@ -352,8 +352,8 @@ namespace UniversityDBExplorer.ViewModels
                 }, (obj) => SelectVM.SelectedGroup != null);
             }
         }
-        #endregion
-        #region TabScrollDown
+        #endregion*/
+        /*#region TabScrollDown
         public RelayCommand ReturnFacultet
         {
             get

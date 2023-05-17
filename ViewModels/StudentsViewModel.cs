@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
@@ -12,9 +14,14 @@ namespace UniversityDBExplorer.ViewModels;
 public class StudentsViewModel : INotifyPropertyChanged
 {
     private GroupModel group;
+    private ObservableCollection<StudentModel> searchedStudents;
     private StudentModel selectedStudent;
     private RelayCommand addNewStudent;
     private RelayCommand removeStudent;
+    private RelayCommand returnGroup;
+    private RelayCommand returnFacultet;
+    private RelayCommand searchStdCommand;
+    private string searchStudents;
     private Mediator mediator { get; set; }
     public GroupModel Group
     {
@@ -66,7 +73,7 @@ public class StudentsViewModel : INotifyPropertyChanged
             {
                 if (obj is not StudentModel std) return;
                 group.Student.Remove(std);
-                //SearchedStudents = group.Student;
+                SearchedStudents = group.Student;
                 BaseViewModel.db.Students.Remove(std);
                 BaseViewModel.db.SaveChanges();
 
@@ -75,8 +82,77 @@ public class StudentsViewModel : INotifyPropertyChanged
                     SelectedStudent = group.Student[^1];
             }, (obj) => (group?.Student.Count > 0 && selectedStudent != null));
         }
-    } 
-    private void OnGroupChange(GroupModel group) => Group = group;
+    }
+
+
+    public ObservableCollection<StudentModel> SearchedStudents
+    {
+        get { return searchedStudents; }
+        set
+        {
+            searchedStudents = value;
+            OnPropertyChanged("SearchedStudents");
+        }
+    }
+    public string SearchStudents
+    {
+        get { return searchStudents; }
+        set { searchStudents = value; OnPropertyChanged("SearchStudents"); }
+    }
+    private void SearchStd()
+    {
+        if (string.IsNullOrWhiteSpace(SearchStudents))
+        {
+            SearchedStudents = new ObservableCollection<StudentModel>(Group.Student);
+        }
+        else
+        {
+            SearchedStudents = new ObservableCollection<StudentModel>(Group.Student.Where(f => f.Name.Contains(SearchStudents, StringComparison.OrdinalIgnoreCase)));
+        }
+    }
+    public RelayCommand SearchStdCommand
+    {
+        get
+        {
+            return searchStdCommand ??= new RelayCommand(obj =>
+            {
+                SearchStd();
+            });
+        }
+    }
+
+
+
+
+    /*
+    public RelayCommand ReturnGroup
+    {
+        get
+        {
+            return returnGroup ??= new RelayCommand(obj =>
+            {
+                SelectedTabIndex = 2;
+            });
+        }
+    }
+
+    public RelayCommand ReturnFacultet
+    {
+        get
+        {
+            return returnFacultet ??= new RelayCommand(obj =>
+            {
+                SelectedTabIndex = 0;
+
+            });
+        }
+    }*/
+
+    private void OnGroupChange(GroupModel group)
+    {
+        Group = group;
+        SearchedStudents = Group.Student;
+    }
     public StudentsViewModel(Mediator mediator)
     {
         this.mediator = mediator;

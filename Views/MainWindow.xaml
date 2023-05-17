@@ -18,7 +18,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <TabControl>
+        <TabControl TabIndex="{Binding SelectedTabIndex}">
             <TabItem Header="Факультеты">
                 <ContentControl Content="{Binding Facultets}" />
             </TabItem>

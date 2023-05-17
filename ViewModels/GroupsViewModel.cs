@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
@@ -10,10 +11,13 @@ namespace UniversityDBExplorer.ViewModels;
 
 public class GroupsViewModel : INotifyPropertyChanged
 {
+    private ObservableCollection<GroupModel> searchedGroups;
     private CafedraModel cafedra;
     private GroupModel selectedGroup;
     private RelayCommand addNewGroup;
     private StudentModel selectedStarosta;
+    private RelayCommand searchGrpCommand;
+    private string searchGroups;
 
     private RelayCommand removeGroup;
     private Mediator mediator { get; set; }
@@ -98,7 +102,55 @@ public class GroupsViewModel : INotifyPropertyChanged
             }, (obj) => (Cafedra?.Groups?.Count > 0 && selectedGroup != null));
         }
     }
-    private void OnCafedraChange(CafedraModel cafedra) => Cafedra = cafedra;
+
+
+
+    public ObservableCollection<GroupModel> SearchedGroups
+    {
+        get { return searchedGroups; }
+        set
+        {
+            searchedGroups = value;
+            OnPropertyChanged("SearchedGroups");
+        }
+    }
+    public string SearchGroups
+    {
+        get { return searchGroups; }
+        set { searchGroups = value; OnPropertyChanged("SearchGroups"); }
+    }
+    private void SearchGrp()
+    {
+        
+        bool isNumber = int.TryParse(SearchGroups, out int number);
+
+        if (!isNumber)
+        {
+            SearchedGroups = new ObservableCollection<GroupModel>(Cafedra.Groups);
+        }
+        else
+        {
+            SearchedGroups = new ObservableCollection<GroupModel>(Cafedra.Groups.Where(f => f.GroupNumber.ToString().Contains(SearchGroups)));
+        }
+    }
+    public RelayCommand SearchGrpCommand
+    {
+        get
+        {
+            return searchGrpCommand ??= new RelayCommand(obj =>
+            {
+                SearchGrp();
+            });
+        }
+    }
+
+
+
+    private void OnCafedraChange(CafedraModel cafedra)
+    {
+        Cafedra = cafedra;
+        SearchedGroups = cafedra.Groups;
+    }
     public GroupsViewModel(Mediator mediator)
     {
         this.mediator = mediator;
