@@ -44,7 +44,7 @@ public class CafedraViewModel : INotifyPropertyChanged
     private void OnFacultetChanged(FacultetModel facultet)
     {
         Facultet = facultet;
-        SearchedCafedras = facultet.Cafedra;
+        SearchedCafedras = facultet?.Cafedra;
     }
     public RelayCommand AddNewCafedra
     {
@@ -67,6 +67,7 @@ public class CafedraViewModel : INotifyPropertyChanged
                 SearchedCafedras = facultet.Cafedra;
                 BaseViewModel.db.Cafedras.Add(caf);
                 BaseViewModel.db.SaveChanges();
+                BaseViewModel.Instance.Cafedras.Add(caf);
             }, obj => Facultet != null);
         }
     }
@@ -82,6 +83,7 @@ public class CafedraViewModel : INotifyPropertyChanged
                  SearchedCafedras = facultet.Cafedra;
                  BaseViewModel.db.Cafedras.Remove(caf);
                  BaseViewModel.db.SaveChanges();
+                 BaseViewModel.Instance.Cafedras?.Remove(caf);
                      
                  DbOperations.RemoveGroups();
                  DbOperations.RemoveStudents();

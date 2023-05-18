@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:UniversityDBExplorer.ViewModels"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
+             
+             xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              d:DataContext="{d:DesignInstance Type=viewModels:SearchStudentsViewModel}"
              Height="500" Width="980">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowGridLines="True">
@@ -25,7 +26,7 @@
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <ListBox Margin="0,0,0,10" Background="#00000033" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
-                 ItemsSource="{Binding St}"
+                 ItemsSource="{Binding Students}"
                  SelectedItem="{Binding SelectedStudent}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -37,11 +38,12 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Facultets}"
-                  SelectedItem="{Binding SelectedStarosta}"
-                  SelectedValue="{Binding SelectedGroup.Starosta}"
+                  SelectedItem="{Binding dd}"
+                  SelectedValue="{Binding SelectedFac}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  ui:ControlHelper.PlaceholderText="Факультеты">
+                  ui:ControlHelper.PlaceholderText="Факультеты"
+                  SelectedIndex="{Binding IndexResetFac}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -50,39 +52,44 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding SelectedGroup.Student}"
-                  SelectedItem="{Binding SelectedStarosta}"
-                  SelectedValue="{Binding SelectedGroup.Starosta}"
+        <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Cafedras}"
+                  SelectedItem="{Binding ddd}"
+                  SelectedValue="{Binding SelectedCaf}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  ui:ControlHelper.PlaceholderText="Кафедры">
+                  ui:ControlHelper.PlaceholderText="Кафедры"
+                  SelectedIndex="{Binding IndexResetCaf}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Title}" />
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding SelectedGroup.Student}"
-                  SelectedItem="{Binding SelectedStarosta}"
-                  SelectedValue="{Binding SelectedGroup.Starosta}"
+        <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding Groups}"
+                  SelectedItem="{Binding dddd}"
+                  SelectedValue="{Binding SelectedGrp}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  ui:ControlHelper.PlaceholderText="Группы">
+                  ui:ControlHelper.PlaceholderText="Группы"
+                  SelectedIndex="{Binding IndexResetGrp}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding GroupNumber}" />
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Content="Сбросить фильтр" Command="{Binding aaa }" Grid.Column="1" Grid.Row="1"
+        <Button Content="Сбросить фильтр" Command="{Binding ResetFilter }" Grid.Column="1" Grid.Row="1"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5,5,5" />
         <TextBox Text="{Binding aa, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Grid.Column="2"
                  Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  Margin="5,5,5,5" 
-                 ui:ControlHelper.PlaceholderText="Напишите имя студента для поиска"/>
+                 ui:ControlHelper.PlaceholderText="Напишите имя студента для поиска">
+            
+            
+        </TextBox>
     </Grid>
 </UserControl>

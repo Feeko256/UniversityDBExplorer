@@ -63,21 +63,12 @@ public class GroupsViewModel : INotifyPropertyChanged
                 {
                     GroupNumber = 1234,
                     Student = new ObservableCollection<StudentModel>(),
-                    Starosta = new StudentModel
-                    {
-                        Name = "Олег Олегович Олежко",
-                        Flu = "нет",
-                        Location = "СПБ",
-                        Mail = "student@etu.ru",
-                        PhoneNumber = "+79211528982",
-                        Status = "Нормально",
-                        StudBiletNumber = 830537
-                    }
                 };
                 Cafedra.Groups?.Add(gr);
                 SearchedGroups = cafedra.Groups;
                 BaseViewModel.db.Groups.Add(gr);
                 BaseViewModel.db.SaveChanges();
+                BaseViewModel.Instance.Groups.Add(gr);
             }, obj => Cafedra != null);
         }
     }
@@ -93,7 +84,8 @@ public class GroupsViewModel : INotifyPropertyChanged
                 BaseViewModel.db.SaveChanges();
                 SearchedGroups = cafedra.Groups;
                 DbOperations.RemoveStudents();
- 
+                BaseViewModel.Instance.Groups.Remove(group);
+
                 if (Cafedra.Groups?.Count > 0)
                     SelectedGroup = Cafedra.Groups[^1];
 
@@ -147,7 +139,7 @@ public class GroupsViewModel : INotifyPropertyChanged
     private void OnCafedraChange(CafedraModel cafedra)
     {
         Cafedra = cafedra;
-        SearchedGroups = cafedra.Groups;
+        SearchedGroups = cafedra?.Groups;
     }
     public GroupsViewModel(Mediator mediator)
     {

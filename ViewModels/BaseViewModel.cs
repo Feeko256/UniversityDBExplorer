@@ -16,14 +16,13 @@ public class BaseViewModel
 
     public static ApplicationContext db = new ApplicationContext();
     public ObservableCollection<FacultetModel> Facultets { get; set; }
-    public ObservableCollection<CafedraModel> C { get; set; }
-    public ObservableCollection<GroupModel> G { get; set; }
-    public ObservableCollection<StudentModel> S { get; set; }
+    public ObservableCollection<CafedraModel> Cafedras { get; set; }
+    public ObservableCollection<GroupModel> Groups { get; set; }
+    public ObservableCollection<StudentModel> Students { get; set; }
 
 
     
-    public static ObservableCollection<GroupModel> Groups;
-    public static ObservableCollection<StudentModel> Students;
+   
     public static BaseViewModel Instance
     {
         get
@@ -40,8 +39,10 @@ public class BaseViewModel
         db.Groups.Load();
         db.Students.Load();
         Instance.Facultets = db.Facultets.Local.ToObservableCollection(); 
-        Instance.S = db.Students.Local.ToObservableCollection(); 
-        //Instance.Cafedras = db.Cafedras.Local.ToObservableCollection();
+        Instance.Students = db.Students.Local.ToObservableCollection(); 
+        Instance.Cafedras = db.Cafedras.Local.ToObservableCollection();
+        Instance.Groups = db.Groups.Local.ToObservableCollection();
+
        // var c1 = new CafedraModel { Title = "ass" };
       ///  var c2 = new CafedraModel { Title = "ass2" };
     //    Cafedras.Add(c1);

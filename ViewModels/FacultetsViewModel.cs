@@ -54,6 +54,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
                 SearchedFacultets = Facultets;
                 BaseViewModel.db.Facultets.Add(fac);
                 BaseViewModel.db.SaveChanges();
+                BaseViewModel.Instance.Facultets.Add(fac);
             });
         }
     }  
@@ -68,6 +69,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
                 SearchedFacultets = Facultets;
                 BaseViewModel.db.Facultets.Remove(fac);
                 BaseViewModel.db.SaveChanges();
+                BaseViewModel.Instance.Facultets.Remove(fac);
 
                 DbOperations.RemoveCafedras();
                 DbOperations.RemoveGroups();

@@ -14,7 +14,12 @@ public static class DbOperations
   .ToList<CafedraModel>();
       BaseViewModel.db.Cafedras.RemoveRange(cafedraList);
       BaseViewModel.db.SaveChanges();
-  }
+        foreach (var item in cafedraList)
+        {
+            BaseViewModel.Instance.Cafedras?.Remove(item);
+        }
+        
+    }
   public static void RemoveGroups()
   {
       var groupsList = BaseViewModel.db.Groups
@@ -22,7 +27,11 @@ public static class DbOperations
   .ToList<GroupModel  >();
       BaseViewModel.db.Groups.RemoveRange(groupsList);
       BaseViewModel.db.SaveChanges();
-  }
+        foreach (var item in groupsList)
+        {
+            BaseViewModel.Instance.Groups?.Remove(item);
+        }
+    }
   public static void RemoveStudents()
   {
       var studentsList = BaseViewModel.db.Students
@@ -30,5 +39,9 @@ public static class DbOperations
   .ToList<StudentModel>();
       BaseViewModel.db.Students.RemoveRange(studentsList);
       BaseViewModel.db.SaveChanges();
-  }
+        foreach (var item in studentsList)
+        {
+            BaseViewModel.Instance.Students?.Remove(item);
+        }
+    }
 }

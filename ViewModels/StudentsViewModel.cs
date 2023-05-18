@@ -62,6 +62,7 @@ public class StudentsViewModel : INotifyPropertyChanged
                 SearchedStudents = group.Student;
                 BaseViewModel.db.Students.Add(st);
                 BaseViewModel.db.SaveChanges();
+                BaseViewModel.Instance.Students.Add(st);
             }, obj=>group!=null);
         }
     }
@@ -77,7 +78,7 @@ public class StudentsViewModel : INotifyPropertyChanged
                 SearchedStudents = group.Student;
                 BaseViewModel.db.Students.Remove(std);
                 BaseViewModel.db.SaveChanges();
-
+                BaseViewModel.Instance.Students.Remove(std);
 
                 if (group.Student?.Count > 0)
                     SelectedStudent = group.Student[^1];
@@ -152,7 +153,7 @@ public class StudentsViewModel : INotifyPropertyChanged
     private void OnGroupChange(GroupModel group)
     {
         Group = group;
-        SearchedStudents = Group.Student;
+        SearchedStudents = Group?.Student;
     }
     public StudentsViewModel(Mediator mediator)
     {
