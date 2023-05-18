@@ -28,14 +28,10 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     public SearchStudentsViewModel()
     {
         Facultets = BaseViewModel.Instance.Facultets;
-        foreach (var VARIABLE in Facultets)
-        {
-            Cafedras.Add(VARIABLE.Cafedra);
-        }
-        Cafedras = Facultets
-        //Students = BaseViewModel.Instance.Students;
-        //Groups=BaseViewModel.Instance.Groups;
-        //Cafedras=BaseViewModel.Instance.Cafedras;
+        
+        Students = BaseViewModel.Instance.Students;
+        Groups=BaseViewModel.Instance.Groups;
+        Cafedras=BaseViewModel.Instance.Cafedras;
     }
 
     public FacultetModel SelectedFacultet
@@ -48,9 +44,13 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         {
             selectedFac = value;
             OnPropertyChanged();
-           // FilterUpdate();
-           Cafedras = SelectedFacultet.Cafedra;
-           MessageBox.Show(Cafedras[0].Title);
+            // FilterUpdate();
+            if (selectedFac != null)
+            {
+                MessageBox.Show(Cafedras[0].Title);
+                Cafedras = SelectedFacultet.Cafedra;
+                MessageBox.Show(Cafedras[0].Title);
+            }
         }
     }
     public CafedraModel SelectedCafedra
@@ -138,29 +138,12 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 IndexResetCaf = -1;
                 IndexResetGrp = -1;
                 Facultets = BaseViewModel.Instance.Facultets;
-                //Students = BaseViewModel.Instance.Students;
-                //Groups = BaseViewModel.Instance.Groups;
-                //Cafedras = BaseViewModel.Instance.Cafedras;
+                Students = BaseViewModel.Instance.Students;
+                Groups = BaseViewModel.Instance.Groups;
+                Cafedras = BaseViewModel.Instance.Cafedras;
             }, (obj) => (IndexResetFac != -1 || IndexResetCaf != -1 || IndexResetGrp != -1));
         }
     }
-
-    /*public FacultetModel SelectedFac
-    {
-
-        get { return selectedFac; }
-        set
-        {
-            selectedFac = value;
-            OnPropertyChanged("selectedFac");
-            if (SelectedFac != null)
-            {
-                Cafedras = SelectedFac.Cafedra;
-            }
-        }
-
-    }*/
-    
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
