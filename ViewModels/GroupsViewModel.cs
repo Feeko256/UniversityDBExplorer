@@ -18,9 +18,9 @@ public class GroupsViewModel : INotifyPropertyChanged
     private StudentModel selectedStarosta;
     private RelayCommand searchGrpCommand;
     private string searchGroups;
-
     private RelayCommand removeGroup;
     private Mediator mediator { get; set; }
+    
     public CafedraModel Cafedra
     {
         get { return cafedra; }

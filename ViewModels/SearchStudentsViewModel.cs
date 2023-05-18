@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media.Media3D;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
+using UniversityDBExplorer.Special.Mediator;
 using UniversityDBExplorer.Views;
 
 namespace UniversityDBExplorer.ViewModels;
@@ -28,10 +29,36 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     public SearchStudentsViewModel()
     {
         Facultets = BaseViewModel.Instance.Facultets;
+        Cafedras = new ObservableCollection<CafedraModel>();
+        Groups = new ObservableCollection<GroupModel>();
+        Students = new ObservableCollection<StudentModel>();
         
-        Students = BaseViewModel.Instance.Students;
-        Groups=BaseViewModel.Instance.Groups;
-        Cafedras=BaseViewModel.Instance.Cafedras;
+        foreach (var a in Facultets)
+        {
+            foreach (var b in a.Cafedra)
+            {
+                Cafedras.Add(b);
+            }
+        }
+        foreach (var a in Cafedras)
+        {
+            if (a.Groups != null)
+                foreach (var b in a.Groups)
+                {
+                    Groups.Add(b);
+                }
+        }
+        foreach (var a in Groups)
+        {
+            if (a.Student != null)
+                foreach (var b in a.Student)
+                {
+                    Students.Add(b);
+                }
+        }
+        //Students = BaseViewModel.Instance.Students;
+        //Groups=BaseViewModel.Instance.Groups;
+        // Cafedras=BaseViewModel.Instance.Cafedras;
     }
 
     public FacultetModel SelectedFacultet
@@ -44,13 +71,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         {
             selectedFac = value;
             OnPropertyChanged();
-            // FilterUpdate();
-            if (selectedFac != null)
-            {
-                MessageBox.Show(Cafedras[0].Title);
-                Cafedras = SelectedFacultet.Cafedra;
-                MessageBox.Show(Cafedras[0].Title);
-            }
+            FilterUpdate();
         }
     }
     public CafedraModel SelectedCafedra
@@ -92,11 +113,33 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     private void FilterUpdate()
     {
         
-      //  if (indexResetFac != -1 && indexResetCaf == -1 && indexResetGrp == -1)
-     //   {
-
-            
-       // }
+        if (indexResetFac != -1 && indexResetCaf == -1 && indexResetGrp == -1)
+        {
+            if (SelectedFacultet != null)
+            {
+                Cafedras.Clear();
+                foreach (var a in SelectedFacultet.Cafedra)
+                {
+                    Cafedras.Add(a);
+                }
+                Groups.Clear();
+                foreach (var a in Cafedras)
+                {
+                    foreach (var b in a.Groups)
+                    {
+                        Groups.Add(b);
+                    }
+                }
+                Students.Clear();
+                foreach (var a in Groups)
+                {
+                    foreach (var b in a.Student)
+                    {
+                      Students.Add(b);  
+                    }
+                }
+            }
+        }
         
     }
 
@@ -138,10 +181,34 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 IndexResetCaf = -1;
                 IndexResetGrp = -1;
                 Facultets = BaseViewModel.Instance.Facultets;
-                Students = BaseViewModel.Instance.Students;
-                Groups = BaseViewModel.Instance.Groups;
-                Cafedras = BaseViewModel.Instance.Cafedras;
-            }, (obj) => (IndexResetFac != -1 || IndexResetCaf != -1 || IndexResetGrp != -1));
+                Cafedras.Clear();
+                Groups.Clear();
+                Students.Clear();
+               foreach (var a in Facultets)
+               {
+                   if (a.Cafedra != null)
+                       foreach (var b in a.Cafedra)
+                       {
+                           Cafedras.Add(b);
+                       }
+               }
+               foreach (var a in Cafedras)
+               {
+                   if (a.Groups != null)
+                       foreach (var b in a.Groups)
+                       {
+                           Groups.Add(b);
+                       }
+               }
+               foreach (var a in Groups)
+               {
+                   if (a.Student != null)
+                       foreach (var b in a.Student)
+                       {
+                           Students.Add(b);
+                       }
+               }//, (obj) => (IndexResetFac != -1 || IndexResetCaf != -1 || IndexResetGrp != -1)
+            });
         }
     }
 
