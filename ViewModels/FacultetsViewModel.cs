@@ -41,7 +41,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
     public RelayCommand AddNewFacultet
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return addNewFacultet ??= new RelayCommand(obj =>
             {
                 var fac = new FacultetModel 
@@ -54,14 +54,14 @@ public class FacultetsViewModel : INotifyPropertyChanged
                 SearchedFacultets = Facultets;
                 BaseViewModel.db.Facultets.Add(fac);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Facultets.Add(fac);
+                BaseViewModel.Instance.Facultets = BaseViewModel.db.Facultets.Local.ToObservableCollection(); 
             });
         }
     }  
     public RelayCommand RemoveFacultet
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return removeFacultet ??= new RelayCommand(obj =>
             {
                 if (obj is not FacultetModel fac) return;
@@ -107,7 +107,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
     public RelayCommand SearchFacCommand
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return searchFacCommand ??= new RelayCommand(obj =>
             {
                 SearchFac();

@@ -49,7 +49,7 @@ public class CafedraViewModel : INotifyPropertyChanged
     public RelayCommand AddNewCafedra
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return addNewCafedra ??= new RelayCommand(obj =>
             {
                 var caf = new CafedraModel
@@ -67,7 +67,7 @@ public class CafedraViewModel : INotifyPropertyChanged
                 SearchedCafedras = facultet.Cafedra;
                 BaseViewModel.db.Cafedras.Add(caf);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Cafedras.Add(caf);
+                BaseViewModel.Instance.Cafedras = BaseViewModel.db.Cafedras.Local.ToObservableCollection(); 
             }, obj => Facultet != null);
         }
     }
@@ -75,7 +75,7 @@ public class CafedraViewModel : INotifyPropertyChanged
      public RelayCommand RemoveCafedra
      {
          get
-         {
+         {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
              return removeCafedra ??= new RelayCommand(obj =>
              {
                  if (obj is not CafedraModel caf) return;
@@ -124,7 +124,7 @@ public class CafedraViewModel : INotifyPropertyChanged
     public RelayCommand SearchCafCommand
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return searchCafCommand ??= new RelayCommand(obj =>
             {
                 SearchCaf();

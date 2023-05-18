@@ -48,6 +48,7 @@ public class StudentsViewModel : INotifyPropertyChanged
         {
             return addNewStudent ??= new RelayCommand(obj =>
             {
+                // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
                 var st = new StudentModel()
                 {
                     Name = "Олег Олегович Олежко",
@@ -62,7 +63,7 @@ public class StudentsViewModel : INotifyPropertyChanged
                 SearchedStudents = group.Student;
                 BaseViewModel.db.Students.Add(st);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Students.Add(st);
+                BaseViewModel.Instance.Students = BaseViewModel.db.Students.Local.ToObservableCollection(); 
             }, obj=>group!=null);
         }
     }
@@ -71,6 +72,7 @@ public class StudentsViewModel : INotifyPropertyChanged
     {
         get
         {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return removeStudent ??= new RelayCommand(obj =>
             {
                 if (obj is not StudentModel std) return;
@@ -116,6 +118,7 @@ public class StudentsViewModel : INotifyPropertyChanged
     {
         get
         {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return searchStdCommand ??= new RelayCommand(obj =>
             {
                 SearchStd();

@@ -56,7 +56,7 @@ public class GroupsViewModel : INotifyPropertyChanged
     public RelayCommand AddNewGroup
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return addNewGroup ??= new RelayCommand(obj =>
             {
                 var gr = new GroupModel
@@ -68,14 +68,14 @@ public class GroupsViewModel : INotifyPropertyChanged
                 SearchedGroups = cafedra.Groups;
                 BaseViewModel.db.Groups.Add(gr);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Groups.Add(gr);
+                BaseViewModel.Instance.Groups = BaseViewModel.db.Groups.Local.ToObservableCollection(); 
             }, obj => Cafedra != null);
         }
     }
     public RelayCommand RemoveGroup
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return removeGroup ??= new RelayCommand(obj =>
             {
                 if (obj is not GroupModel group) return;
@@ -126,7 +126,7 @@ public class GroupsViewModel : INotifyPropertyChanged
     public RelayCommand SearchGrpCommand
     {
         get
-        {
+        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return searchGrpCommand ??= new RelayCommand(obj =>
             {
                 SearchGrp();
