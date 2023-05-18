@@ -31,6 +31,9 @@
             <TabItem Header="Студенты">
                 <ContentControl Content="{Binding  Students}" />
             </TabItem>
+            <TabItem HorizontalAlignment="Right" Header="Поиск студентов">
+                <ContentControl Content="{Binding StudentSearch  }" />
+            </TabItem>
         </TabControl>
     </Grid>
 </fw:AcrylicWindow>

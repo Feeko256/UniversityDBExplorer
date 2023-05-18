@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="UniversityDBExplorer.Views.StudentsSearch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:UniversityDBExplorer.Views"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:UniversityDBExplorer.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels:SearchStudentsViewModel}"
+             Height="500" Width="980">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="380" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="160" />
+           <ColumnDefinition Width="480" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <ListBox Margin="0,0,0,10" Background="#00000033" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+                 ItemsSource="{Binding SearchedStudents}"
+                 SelectedItem="{Binding SelectedStudent}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16"
+                                   FontWeight="Bold" Language="ru-ru" Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding SelectedGroup.Student}"
+                  SelectedItem="{Binding SelectedStarosta}"
+                  SelectedValue="{Binding SelectedGroup.Starosta}"
+                  Margin="5,5,5,5"
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding SelectedGroup.Student}"
+                  SelectedItem="{Binding SelectedStarosta}"
+                  SelectedValue="{Binding SelectedGroup.Starosta}"
+                  Margin="5,5,5,5"
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding SelectedGroup.Student}"
+                  SelectedItem="{Binding SelectedStarosta}"
+                  SelectedValue="{Binding SelectedGroup.Starosta}"
+                  Margin="5,5,5,5"
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Grid>
+</UserControl>

@@ -394,10 +394,12 @@ namespace UniversityDBExplorer.ViewModels
        public ContentControl  Cafedras { get; set; }
        public ContentControl  Groups { get; set; }
        public ContentControl  Students { get; set; }
+       public ContentControl  StudentSearch { get; set; }
        public FacultetsViewModel FacultetsViewModel { get; set; }
         public CafedraViewModel CafedraViewModel { get; set; }
         public GroupsViewModel GroupsViewModel { get; set; }
         public StudentsViewModel StudentsViewModel { get; set; }
+        public SearchStudentsViewModel SearchStudentsViewModel { get; set; }
         
 
 
@@ -418,6 +420,10 @@ namespace UniversityDBExplorer.ViewModels
            Students = new Students()
            {
                DataContext = StudentsViewModel = new StudentsViewModel(mediator)
+           };
+           StudentSearch = new StudentsSearch()
+           {
+               DataContext = SearchStudentsViewModel = new SearchStudentsViewModel()
            };
            // Cafedras = new Cafedras();
            // SelectVM = new SelectViewModel();
