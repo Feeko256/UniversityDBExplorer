@@ -63,9 +63,6 @@ public class GroupsViewModel : INotifyPropertyChanged
                 {
                     GroupNumber = 1234,
                     Student = new ObservableCollection<StudentModel>(),
-                    Mail = "starosta@etu.ru",
-                    PhoneNumber = "+73213332215",
-                    StarostaName = "ФИО",
                     Starosta = new StudentModel
                     {
                         Name = "Олег Олегович Олежко",
