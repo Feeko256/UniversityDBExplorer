@@ -15,18 +15,12 @@ public class BaseViewModel
     private static readonly BaseViewModel instance = new BaseViewModel();
 
     public static ApplicationContext db = new ApplicationContext();
-    private ObservableCollection<FacultetModel> facultets;
+    public ObservableCollection<FacultetModel> Facultets { get; set; }
+    public ObservableCollection<CafedraModel> C { get; set; }
+    public ObservableCollection<GroupModel> G { get; set; }
+    public ObservableCollection<StudentModel> S { get; set; }
 
 
-    public ObservableCollection<FacultetModel> Facultets
-    {
-        get { return facultets; }
-        set
-        {
-            facultets = value;
-            BaseViewModel.Instance.facultets = facultets;
-        }
-    }
     
     public static ObservableCollection<GroupModel> Groups;
     public static ObservableCollection<StudentModel> Students;
@@ -45,8 +39,9 @@ public class BaseViewModel
         db.Cafedras.Load();
         db.Groups.Load();
         db.Students.Load();
-        Instance.Facultets = db.Facultets.Local.ToObservableCollection();
-       // Instance.Cafedras = db.Cafedras.Local.ToObservableCollection();
+        Instance.Facultets = db.Facultets.Local.ToObservableCollection(); 
+        Instance.S = db.Students.Local.ToObservableCollection(); 
+        //Instance.Cafedras = db.Cafedras.Local.ToObservableCollection();
        // var c1 = new CafedraModel { Title = "ass" };
       ///  var c2 = new CafedraModel { Title = "ass2" };
     //    Cafedras.Add(c1);
