@@ -12,9 +12,6 @@ namespace UniversityDBExplorer.Models
     public class GroupModel : INotifyPropertyChanged
     {
         private int groupNumber;
-        private string? starostaName;
-        private string? mail;
-        private string? phoneNumber;
         private ObservableCollection<StudentModel>? student;
         private StudentModel? starosta;
         public int Id { get; set; }
@@ -36,7 +33,6 @@ namespace UniversityDBExplorer.Models
                 OnPropertyChanged("Student");
             }
         }
-
         public int GroupNumber 
         {
             get { return groupNumber;}
@@ -45,33 +41,6 @@ namespace UniversityDBExplorer.Models
                 groupNumber = value;
                 OnPropertyChanged("GroupNumber");
             } 
-        }
-        public string StarostaName
-        {
-            get { return starostaName; }
-            set
-            {
-                starostaName = value;
-                OnPropertyChanged("StarostaName");
-            }
-        }
-        public string Mail
-        {
-            get { return mail; }
-            set
-            {
-                mail = value;
-                OnPropertyChanged("Mail");
-            }
-        }
-        public string PhoneNumber
-        {
-            get { return phoneNumber; }
-            set
-            {
-                phoneNumber = value;
-                OnPropertyChanged("PhoneNumber");
-            }
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string prop = "")
