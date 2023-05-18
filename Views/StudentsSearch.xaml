@@ -38,8 +38,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Facultets}"
-                  SelectedItem="{Binding dd}"
-                  SelectedValue="{Binding SelectedFac}"
+                  SelectedItem="{Binding SelectedFacultet}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   ui:ControlHelper.PlaceholderText="Факультеты"
@@ -53,8 +52,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Cafedras}"
-                  SelectedItem="{Binding ddd}"
-                  SelectedValue="{Binding SelectedCaf}"
+                  SelectedItem="{Binding SelectedCafedra}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   ui:ControlHelper.PlaceholderText="Кафедры"
@@ -68,8 +66,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding Groups}"
-                  SelectedItem="{Binding dddd}"
-                  SelectedValue="{Binding SelectedGrp}"
+                  SelectedItem="{Binding SelectedGroup}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   ui:ControlHelper.PlaceholderText="Группы"
