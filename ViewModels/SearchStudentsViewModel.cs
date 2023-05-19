@@ -365,7 +365,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             SearchedStudents = new ObservableCollection<StudentModel>(Students.Where(f => f.Name.Contains(SearchSearchStudents, StringComparison.OrdinalIgnoreCase)));
         }
     }
-    public RelayCommand SearchStdCommand
+    public RelayCommand SearchStudCommand
     {
         get
         {
