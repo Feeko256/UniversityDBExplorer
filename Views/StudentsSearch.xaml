@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:UniversityDBExplorer.ViewModels"
-             
-             xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:interactivity="http://prismlibrary.com/"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DataContext="{d:DesignInstance Type=viewModels:SearchStudentsViewModel}"
              Height="500" Width="980">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowGridLines="True">
@@ -26,7 +27,7 @@
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <ListBox Margin="0,0,0,10" Background="#00000033" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
-                 ItemsSource="{Binding Students}"
+                 ItemsSource="{Binding SearchedStudents}"
                  SelectedItem="{Binding SelectedStudent}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -42,7 +43,8 @@
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   ui:ControlHelper.PlaceholderText="Факультеты"
-                  SelectedIndex="{Binding IndexResetFac}">
+                  SelectedIndex="{Binding IndexResetFac}"
+                  IsEnabled="{Binding FacultetComboboxEnabled}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -56,7 +58,8 @@
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   ui:ControlHelper.PlaceholderText="Кафедры"
-                  SelectedIndex="{Binding IndexResetCaf}">
+                  SelectedIndex="{Binding IndexResetCaf}"
+                  IsEnabled="{Binding CafedraComboboxEnabled}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -70,7 +73,8 @@
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   ui:ControlHelper.PlaceholderText="Группы"
-                  SelectedIndex="{Binding IndexResetGrp}">
+                  SelectedIndex="{Binding IndexResetGrp}"
+                  IsEnabled="{Binding GroupComboboxEnabled}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -81,12 +85,16 @@
         </ComboBox>
         <Button Content="Сбросить/обновить" Command="{Binding ResetFilter }" Grid.Column="1" Grid.Row="1"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5,5,5" />
-        <TextBox Text="{Binding aa, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Grid.Column="2"
+        <TextBox Text="{Binding SearchSearchStudents, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Grid.Column="2"
                  Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  Margin="5,5,5,5" 
                  ui:ControlHelper.PlaceholderText="Напишите имя студента для поиска">
-            
-            
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="TextChanged">
+                    <interactivity:InvokeCommandAction Command="{Binding SearchStudCommand}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+
         </TextBox>
     </Grid>
 </UserControl>
