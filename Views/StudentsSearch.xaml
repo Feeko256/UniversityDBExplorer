@@ -10,7 +10,7 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DataContext="{d:DesignInstance Type=viewModels:SearchStudentsViewModel}"
              Height="500" Width="980">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowGridLines="True">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
             <RowDefinition Height="50" />
@@ -91,10 +91,146 @@
                  ui:ControlHelper.PlaceholderText="Напишите имя студента для поиска">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="TextChanged">
-                    <interactivity:InvokeCommandAction Command="{Binding SearchStudCommand}" />
+                    <interactivity:InvokeCommandAction Command="{Binding SearchStdCommand}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
-
         </TextBox>
+         <StackPanel Orientation="Vertical" VerticalAlignment="Top"
+                                 HorizontalAlignment="Center" Grid.Row="1" Grid.Column="4" Grid.RowSpan="3">
+                         <Border Margin="5,10,5,5" Height="35" BorderThickness="1" CornerRadius="2">
+                             <Border.BorderBrush>
+                                 <SolidColorBrush
+                                     Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                             </Border.BorderBrush>
+                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        FontSize="14">
+                                 <Run Language="ru-ru" Text="Редактирование данных" />
+                             </TextBlock>
+                         </Border>
+                         <StackPanel
+                             Orientation="Horizontal" VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch">
+                             <StackPanel>
+                                 <Border Margin="5,5,5,15" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Center" Height="35" Width="220">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="ФИО Студента" />
+                                     </TextBlock>
+                                 </Border>
+                                 <Border Margin="5,5,5,0" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right" Width="220"
+                                         Height="35" VerticalAlignment="Center">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="Номер студбилета" />
+                                     </TextBlock>
+                                 </Border>
+                                 <Border Margin="5,5,5,0" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right" Width="220"
+                                         Height="35" VerticalAlignment="Center">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="Местоположение" />
+                                     </TextBlock>
+                                 </Border>
+                                 <Border Margin="5,5,5,0" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right" Width="220"
+                                         Height="35" VerticalAlignment="Center">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="Статус успеваемости" />
+                                     </TextBlock>
+                                 </Border>
+                                 <Border Margin="5,5,5,15" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right" Width="220"
+                                         Height="35" VerticalAlignment="Center">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="Флюрография" />
+                                     </TextBlock>
+                                 </Border>
+                                 <Border Margin="5,5,5,0" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right" Width="220"
+                                         Height="35" VerticalAlignment="Center">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="Электронная почта" />
+                                     </TextBlock>
+                                 </Border>
+                                 <Border Margin="5,5,5,0" BorderThickness="1" CornerRadius="2"
+                                         HorizontalAlignment="Right" Width="220"
+                                         Height="35" VerticalAlignment="Center">
+                                     <Border.BorderBrush>
+                                         <SolidColorBrush
+                                             Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                     </Border.BorderBrush>
+                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                FontSize="14">
+                                         <Run Language="ru-ru" Text="Номер телефона" />
+                                     </TextBlock>
+                                 </Border>
+                             </StackPanel>
+                             <StackPanel Width="0" />
+                             <StackPanel>
+                                 <TextBox BorderBrush="White" Margin="5,5,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35"
+                                          HorizontalAlignment="Stretch" />
+                                 <TextBox BorderBrush="White" Margin="5,15,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding StudBiletNumber, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                 <TextBox BorderBrush="White" Margin="5,0,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                 <TextBox BorderBrush="White" Margin="5,0,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                 <TextBox BorderBrush="White" Margin="5,0,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding Flu, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                 <TextBox BorderBrush="White" Margin="5,15,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35"
+                                          HorizontalAlignment="Stretch" />
+                                 <TextBox BorderBrush="White" Margin="5,0,5,5"
+                                          DataContext="{Binding SelectedStudent}"
+                                          Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" Width="220" Height="35"
+                                          HorizontalAlignment="Stretch" />
+                             </StackPanel>
+                         </StackPanel>
+                     </StackPanel>
     </Grid>
 </UserControl>
