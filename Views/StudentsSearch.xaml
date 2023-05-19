@@ -91,7 +91,7 @@
                  ui:ControlHelper.PlaceholderText="Напишите имя студента для поиска">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="TextChanged">
-                    <interactivity:InvokeCommandAction Command="{Binding SearchStdCommand}" />
+                    <interactivity:InvokeCommandAction Command="{Binding SearchStudCommand}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </TextBox>
