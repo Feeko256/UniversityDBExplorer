@@ -21,8 +21,6 @@ public class BaseViewModel
     public ObservableCollection<StudentModel> Students { get; set; }
 
 
-    
-   
     public static BaseViewModel Instance
     {
         get
