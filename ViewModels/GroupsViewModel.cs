@@ -19,6 +19,8 @@ public class GroupsViewModel : INotifyPropertyChanged
     private RelayCommand searchGrpCommand;
     private string searchGroups;
     private RelayCommand removeGroup;
+    private RelayCommand openLast;
+    private RelayCommand openNext;
     private Mediator mediator { get; set; }
     
     public CafedraModel Cafedra
@@ -89,7 +91,7 @@ public class GroupsViewModel : INotifyPropertyChanged
                 if (Cafedra.Groups?.Count > 0)
                     SelectedGroup = Cafedra.Groups[^1];
 
-            }, (obj) => (Cafedra?.Groups?.Count > 0 && selectedGroup != null));
+            }, (obj) => (Cafedra?.Groups?.Count > 0 && SelectedGroup != null));
         }
     }
 
@@ -134,6 +136,30 @@ public class GroupsViewModel : INotifyPropertyChanged
         }
     }
 
+
+
+    public RelayCommand OpenPrev
+    {
+        get
+        {
+            return openLast ??= new RelayCommand(obj =>
+            {
+                mediator.OnIndexChange(1);
+            });
+        }
+    }
+
+    public RelayCommand OpenNext
+    {
+        get
+        {
+            return openNext ??= new RelayCommand(obj =>
+            {
+                mediator.OnIndexChange(3);
+
+            }, (obj) => (SelectedGroup != null));
+        }
+    }
 
 
     private void OnCafedraChange(CafedraModel cafedra)

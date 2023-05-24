@@ -20,6 +20,8 @@ public class CafedraViewModel : INotifyPropertyChanged
     private RelayCommand removeCafedra;
     private RelayCommand searchCafCommand;
     private string searchCafedras;
+    private RelayCommand openLast;
+    private RelayCommand openNext;
     private Mediator mediator { get; set; }
     public CafedraModel? SelectedCafedra
     {
@@ -90,7 +92,7 @@ public class CafedraViewModel : INotifyPropertyChanged
  
                  if (Facultet.Cafedra?.Count > 0)
                      SelectedCafedra = Facultet.Cafedra[^1];
-             }, (obj) => Facultet?.Cafedra?.Count > 0 && selectedCafedra != null);
+             }, (obj) => Facultet?.Cafedra?.Count > 0 && SelectedCafedra != null);
          }
      }
 
@@ -141,7 +143,28 @@ public class CafedraViewModel : INotifyPropertyChanged
             OnPropertyChanged("Facultet");
         }
     }
+    public RelayCommand OpenPrev
+    {
+        get
+        {
+            return openLast ??= new RelayCommand(obj =>
+            {
+                mediator.OnIndexChange(0);
+            });
+        }
+    }
 
+    public RelayCommand OpenNext
+    {
+        get
+        {
+            return openNext ??= new RelayCommand(obj =>
+            {
+                mediator.OnIndexChange(2);
+
+            }, (obj) => (SelectedCafedra != null));
+        }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string prop = "")

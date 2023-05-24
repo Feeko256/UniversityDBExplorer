@@ -18,8 +18,8 @@ public class StudentsViewModel : INotifyPropertyChanged
     private StudentModel selectedStudent;
     private RelayCommand addNewStudent;
     private RelayCommand removeStudent;
-    private RelayCommand returnGroup;
-    private RelayCommand returnFacultet;
+    private RelayCommand openLast;
+    private RelayCommand openNext;
     private RelayCommand searchStdCommand;
     private string searchStudents;
     private Mediator mediator { get; set; }
@@ -84,7 +84,7 @@ public class StudentsViewModel : INotifyPropertyChanged
 
                 if (group.Student?.Count > 0)
                     SelectedStudent = group.Student[^1];
-            }, (obj) => (group?.Student.Count > 0 && selectedStudent != null));
+            }, (obj) => (group?.Student.Count > 0 && SelectedStudent != null));
         }
     }
 
@@ -129,29 +129,29 @@ public class StudentsViewModel : INotifyPropertyChanged
 
 
 
-    /*
-    public RelayCommand ReturnGroup
+    
+    public RelayCommand OpenPrev
     {
         get
         {
-            return returnGroup ??= new RelayCommand(obj =>
+            return openLast ??= new RelayCommand(obj =>
             {
-                SelectedTabIndex = 2;
+                mediator.OnIndexChange(2);
             });
         }
     }
 
-    public RelayCommand ReturnFacultet
+    public RelayCommand OpenNext
     {
         get
         {
-            return returnFacultet ??= new RelayCommand(obj =>
+            return openNext ??= new RelayCommand(obj =>
             {
-                SelectedTabIndex = 0;
+                mediator.OnIndexChange(0);
 
             });
         }
-    }*/
+    }
 
     private void OnGroupChange(GroupModel group)
     {

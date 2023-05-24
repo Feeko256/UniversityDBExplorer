@@ -23,9 +23,10 @@ public class FacultetsViewModel : INotifyPropertyChanged
     private RelayCommand removeFacultet;
     private RelayCommand updateCafedras;
     private RelayCommand searchFacCommand;
-    private RelayCommand openCafedra;
+    private RelayCommand openLast;
+    private RelayCommand openNext;
     private string searchFacultets;
-    private wndVM _wnd;
+    
     private Mediator mediator { get; set; }
     public FacultetModel? SelectedFacultet
     {
@@ -40,15 +41,26 @@ public class FacultetsViewModel : INotifyPropertyChanged
             mediator.OnFacultetChanged(SelectedFacultet);
         }
     }
-    public RelayCommand OpenCafedra
+    public RelayCommand OpenPrev
     {
         get
         {
-            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
-            return openCafedra ??= new RelayCommand(obj =>
+            return openLast ??= new RelayCommand(obj =>
+            {
+                mediator.OnIndexChange(3);
+            });
+        }
+    }
+
+    public RelayCommand OpenNext
+    {
+        get
+        {
+            return openNext ??= new RelayCommand(obj =>
             {
                 mediator.OnIndexChange(1);
-            }, (obj) => SelectedFacultet != null);
+
+            }, (obj) => (SelectedFacultet != null));
         }
     }
     public RelayCommand AddNewFacultet
@@ -91,7 +103,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
 
                 if (Facultets?.Count > 0)
                     SelectedFacultet = Facultets[^1];
-            }, (obj) => (Facultets.Count > 0 && selectedFacultet!=null));
+            }, (obj) => (Facultets.Count > 0 && SelectedFacultet!=null));
         }
     }
     
@@ -133,7 +145,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
         Facultets = BaseViewModel.Instance.Facultets;
         SearchedFacultets = new ObservableCollection<FacultetModel>(Facultets);
         this.mediator = mediator;
-        _wnd = new wndVM();
+        
     }
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string prop = "")
