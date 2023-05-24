@@ -24,6 +24,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
     private RelayCommand updateCafedras;
     private RelayCommand searchFacCommand;
     private string searchFacultets;
+    private wndVM _wnd;
     private Mediator mediator { get; set; }
     public FacultetModel? SelectedFacultet
     {
@@ -54,7 +55,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
                 SearchedFacultets = Facultets;
                 BaseViewModel.db.Facultets.Add(fac);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Facultets = BaseViewModel.db.Facultets.Local.ToObservableCollection(); 
+                BaseViewModel.Instance.Facultets = BaseViewModel.db.Facultets.Local.ToObservableCollection();
             });
         }
     }  
@@ -119,6 +120,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
         Facultets = BaseViewModel.Instance.Facultets;
         SearchedFacultets = new ObservableCollection<FacultetModel>(Facultets);
         this.mediator = mediator;
+        _wnd = new wndVM();
     }
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string prop = "")

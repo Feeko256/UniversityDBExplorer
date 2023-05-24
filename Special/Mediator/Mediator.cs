@@ -28,5 +28,4 @@ public class Mediator
     {
         StudentChange?.Invoke(student);
     }
-
 }
