@@ -392,8 +392,8 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 BaseViewModel.Instance.Students.Remove(std);
 
                 if (Students?.Count > 0)
-                    selectedStd = Students[^1];
-            }, (obj) => (Students.Count > 0 && selectedStd != null));
+                    SelectedStudent = Students[^1];
+            }, (obj) => (Students.Count > 0 && SelectedStudent != null));
         }
     }
 
