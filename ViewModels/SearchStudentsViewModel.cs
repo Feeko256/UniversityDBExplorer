@@ -16,10 +16,10 @@ namespace UniversityDBExplorer.ViewModels;
 
 public class SearchStudentsViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<FacultetModel> Facultets { get; set; }
-    public ObservableCollection<StudentModel> Students { get; set; }
-    public ObservableCollection<GroupModel> Groups { get; set; }
-    public ObservableCollection<CafedraModel> Cafedras { get; set; }
+    private ObservableCollection<StudentModel> searchedStudents;
+    private string searchSearchStudents;
+    private RelayCommand searchStudCommand;
+    private RelayCommand removeStudent;
     private RelayCommand resetFilter;
     private int indexResetFac = -1;
     private int indexResetCaf = -1;
@@ -28,6 +28,15 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     private CafedraModel selectedCaf;
     private GroupModel selectedGrp;
     private StudentModel selectedStd;
+    private bool cafedraComboboxEnabled;
+    private bool facultetComboboxEnabled;
+    private bool groupComboboxEnabled;
+
+    public ObservableCollection<FacultetModel> Facultets { get; set; }
+    public ObservableCollection<StudentModel> Students { get; set; }
+    public ObservableCollection<GroupModel> Groups { get; set; }
+    public ObservableCollection<CafedraModel> Cafedras { get; set; }
+
     public SearchStudentsViewModel()
     {
         Facultets = BaseViewModel.Instance.Facultets;
@@ -69,61 +78,37 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
     public FacultetModel SelectedFacultet
     {
-        get
-        {
-            return selectedFac;
-        }
+        get => selectedFac;
         set
         {
             selectedFac = value;
             OnPropertyChanged();
-            if (SelectedCafedra != null)
-            {
-               // SelectedCafedra = null;
-            }
-            if (SelectedGroup != null)
-            {
-               // SelectedGroup = null;
-            }
             FilterUpdate();
         }
     }
     public CafedraModel SelectedCafedra
     {
-        get
-        {
-            return selectedCaf;
-        }
+        get => selectedCaf;
         set
         {
             selectedCaf = value;
             OnPropertyChanged();
-            if (SelectedGroup != null)
-            {
-               // SelectedGroup = null;
-            }
             FilterUpdate();
         }
     }
-
     public GroupModel SelectedGroup
     {
-        get { return selectedGrp; }
+        get => selectedGrp;
         set
         {
             selectedGrp = value;
             OnPropertyChanged();
-            if (SelectedStudent != null)
-            {
-               // SelectedStudent = null;
-            }
             FilterUpdate();
         }
     }
-
     public StudentModel SelectedStudent
     {
-        get { return selectedStd; }
+        get => selectedStd;
         set
         {
             selectedStd = value;
@@ -131,14 +116,33 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
         }
     }
-    private bool cafedraComboboxEnabled;
-    private bool facultetComboboxEnabled;
-    private bool groupComboboxEnabled;
-
-    public bool CafedraComboboxEnabled { get { return cafedraComboboxEnabled; } set { cafedraComboboxEnabled = value; OnPropertyChanged(); } }
-    public bool FacultetComboboxEnabled { get { return facultetComboboxEnabled; } set { facultetComboboxEnabled = value; OnPropertyChanged(); } }
-    public bool GroupComboboxEnabled { get { return groupComboboxEnabled; } set { groupComboboxEnabled = value; OnPropertyChanged(); } }
-
+    public bool CafedraComboboxEnabled 
+    {
+        get => cafedraComboboxEnabled;
+        set 
+        {
+            cafedraComboboxEnabled = value;
+            OnPropertyChanged(); 
+        } 
+    }
+    public bool FacultetComboboxEnabled 
+    {
+        get => facultetComboboxEnabled;
+        set
+        { 
+            facultetComboboxEnabled = value;
+            OnPropertyChanged(); 
+        } 
+    }
+    public bool GroupComboboxEnabled 
+    { 
+        get => groupComboboxEnabled;
+        set
+        {
+            groupComboboxEnabled = value;
+            OnPropertyChanged();
+        }
+    }
     private void FilterUpdate()
     {
         if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
@@ -256,10 +260,9 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             }
         } */
     }
-
     public int IndexResetFac
     {
-        get { return indexResetFac; }
+        get => indexResetFac;
         set
         {
             indexResetFac = value;
@@ -268,7 +271,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     }
     public int IndexResetCaf
     {
-        get { return indexResetCaf; }
+        get => indexResetCaf;
         set
         {
             indexResetCaf = value;
@@ -277,7 +280,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     }
     public int IndexResetGrp
     {
-        get { return indexResetGrp; }
+        get => indexResetGrp;
         set
         {
             indexResetGrp = value;
@@ -295,7 +298,6 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             }/*, (obj) => (IndexResetFac != -1 || IndexResetCaf != -1 || IndexResetGrp != -1)*/);
         }
     }
-
     private void NewMethod()
     {
         IndexResetFac = -1;
@@ -334,16 +336,9 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         }
         SearchedStudents = new ObservableCollection<StudentModel>(Students);
     }
-
-    private ObservableCollection<StudentModel> searchedStudents;
-    private string searchSearchStudents;
-    private RelayCommand searchStudCommand;
-    private RelayCommand removeStudent;
-
-
     public ObservableCollection<StudentModel> SearchedStudents
     {
-        get { return searchedStudents; }
+        get => searchedStudents;
         set
         {
             searchedStudents = value;
@@ -352,7 +347,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     }
     public string SearchSearchStudents
     {
-        get { return searchSearchStudents; }
+        get => searchSearchStudents;
         set { searchSearchStudents = value; OnPropertyChanged("SearchStudents"); }
     }
     private void SearchStud()
@@ -396,15 +391,9 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             }, (obj) => (Students.Count > 0 && SelectedStudent != null));
         }
     }
-
-
-
-
     public event PropertyChangedEventHandler? PropertyChanged;
-
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }
