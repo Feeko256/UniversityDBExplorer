@@ -23,6 +23,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
     private RelayCommand removeFacultet;
     private RelayCommand updateCafedras;
     private RelayCommand searchFacCommand;
+    private RelayCommand openCafedra;
     private string searchFacultets;
     private wndVM _wnd;
     private Mediator mediator { get; set; }
@@ -39,10 +40,22 @@ public class FacultetsViewModel : INotifyPropertyChanged
             mediator.OnFacultetChanged(SelectedFacultet);
         }
     }
+    public RelayCommand OpenCafedra
+    {
+        get
+        {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+            return openCafedra ??= new RelayCommand(obj =>
+            {
+                mediator.OnIndexChange(1);
+            }, (obj) => SelectedFacultet != null);
+        }
+    }
     public RelayCommand AddNewFacultet
     {
         get
-        {            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+        {           
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return addNewFacultet ??= new RelayCommand(obj =>
             {
                 var fac = new FacultetModel 

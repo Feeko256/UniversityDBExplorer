@@ -12,6 +12,8 @@ public class Mediator
     public event Action<GroupModel> GroupChange;
     public event Action<StudentModel> StudentChange;
 
+    public event Action<int> IndexChange; 
+
     public void OnFacultetChanged(FacultetModel facultet)
     {
         FacultetChange?.Invoke(facultet);
@@ -27,5 +29,9 @@ public class Mediator
     public void OnStudentChange(StudentModel student)
     {
         StudentChange?.Invoke(student);
+    }
+    public void OnIndexChange(int index)
+    {
+        IndexChange?.Invoke(index);
     }
 }

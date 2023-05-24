@@ -400,11 +400,26 @@ namespace UniversityDBExplorer.ViewModels
         public GroupsViewModel GroupsViewModel { get; set; }
         public StudentsViewModel StudentsViewModel { get; set; }
         public SearchStudentsViewModel SearchStudentsViewModel { get; set; }
-        
+        private int selectedIndex;
+
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set
+            {
+                selectedIndex = value;
+                OnPropertyChanged();
+            }
+        }
+        private void OnIndexChange(int index)
+        {
+            SelectedIndex = index;
+        }
 
 
        public MainViewModel()
        {
+           mediator.IndexChange += OnIndexChange;
            Facultets = new Facultets()
            {
                DataContext = FacultetsViewModel = new FacultetsViewModel(mediator)
@@ -425,6 +440,7 @@ namespace UniversityDBExplorer.ViewModels
            {
                DataContext = SearchStudentsViewModel = new SearchStudentsViewModel()
            };
+           
            // Cafedras = new Cafedras();
            // SelectVM = new SelectViewModel();
            //  db.Database.EnsureCreated();
