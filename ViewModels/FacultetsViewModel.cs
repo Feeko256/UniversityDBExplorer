@@ -17,6 +17,7 @@ namespace UniversityDBExplorer.ViewModels;
 public class FacultetsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<FacultetModel> Facultets { get; set; }
+
     private ObservableCollection<FacultetModel> searchedFacultets;
     private FacultetModel? selectedFacultet;
     private RelayCommand addNewFacultet;
@@ -51,7 +52,6 @@ public class FacultetsViewModel : INotifyPropertyChanged
             });
         }
     }
-
     public RelayCommand OpenNext
     {
         get
@@ -59,7 +59,6 @@ public class FacultetsViewModel : INotifyPropertyChanged
             return openNext ??= new RelayCommand(obj =>
             {
                 mediator.OnIndexChange(1);
-
             }, (obj) => (SelectedFacultet != null));
         }
     }
@@ -106,7 +105,6 @@ public class FacultetsViewModel : INotifyPropertyChanged
             }, (obj) => (Facultets.Count > 0 && SelectedFacultet!=null));
         }
     }
-    
     public ObservableCollection<FacultetModel> SearchedFacultets
     {
         get { return searchedFacultets; }
@@ -145,7 +143,6 @@ public class FacultetsViewModel : INotifyPropertyChanged
         Facultets = BaseViewModel.Instance.Facultets;
         SearchedFacultets = new ObservableCollection<FacultetModel>(Facultets);
         this.mediator = mediator;
-        
     }
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string prop = "")

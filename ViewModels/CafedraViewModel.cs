@@ -36,7 +36,6 @@ public class CafedraViewModel : INotifyPropertyChanged
             mediator.OnCafedraChange(SelectedCafedra);
         }
     }
-    
     public CafedraViewModel(Mediator mediator)
     {
         this.mediator = mediator;
@@ -73,7 +72,6 @@ public class CafedraViewModel : INotifyPropertyChanged
             }, obj => Facultet != null);
         }
     }
-
      public RelayCommand RemoveCafedra
      {
          get
@@ -95,9 +93,6 @@ public class CafedraViewModel : INotifyPropertyChanged
              }, (obj) => Facultet?.Cafedra?.Count > 0 && SelectedCafedra != null);
          }
      }
-
-
-
     public ObservableCollection<CafedraModel> SearchedCafedras
     {
         get { return searchedCafedras; }
@@ -133,7 +128,6 @@ public class CafedraViewModel : INotifyPropertyChanged
             });
         }
     }
-
     public FacultetModel Facultet
     {
         get { return facultet; }
@@ -153,7 +147,6 @@ public class CafedraViewModel : INotifyPropertyChanged
             });
         }
     }
-
     public RelayCommand OpenNext
     {
         get
@@ -165,7 +158,6 @@ public class CafedraViewModel : INotifyPropertyChanged
             }, (obj) => (SelectedCafedra != null));
         }
     }
-
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string prop = "")
     {
