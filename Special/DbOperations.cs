@@ -18,7 +18,6 @@ public static class DbOperations
         {
             BaseViewModel.Instance.Cafedras?.Remove(item);
         }
-        
     }
   public static void RemoveGroups()
   {
