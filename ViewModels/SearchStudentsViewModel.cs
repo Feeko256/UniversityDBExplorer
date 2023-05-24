@@ -338,6 +338,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     private ObservableCollection<StudentModel> searchedStudents;
     private string searchSearchStudents;
     private RelayCommand searchStudCommand;
+    private RelayCommand removeStudent;
 
 
     public ObservableCollection<StudentModel> SearchedStudents
@@ -376,7 +377,25 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             });
         }
     }
+    public RelayCommand RemoveStudent
+    {
+        get
+        {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+            return removeStudent ??= new RelayCommand(obj =>
+            {
+                if (obj is not StudentModel std) return;
+                Students.Remove(std);
+                SearchedStudents = Students;
+                BaseViewModel.db.Students.Remove(std);
+                BaseViewModel.db.SaveChanges();
+                BaseViewModel.Instance.Students.Remove(std);
 
+                if (Students?.Count > 0)
+                    selectedStd = Students[^1];
+            }, (obj) => (Students.Count > 0 && selectedStd != null));
+        }
+    }
 
 
 

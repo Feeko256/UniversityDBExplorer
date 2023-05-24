@@ -85,6 +85,8 @@
         </ComboBox>
         <Button Content="Сбросить/обновить" Command="{Binding ResetFilter }" Grid.Column="1" Grid.Row="1"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5,5,5" />
+        <Button Command="{Binding RemoveStudent}" CommandParameter="{Binding SelectedStudent}" Content="Удалить студента" Grid.Row="3" Grid.Column="4"
+                VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10,10,10"/> 
         <TextBox Text="{Binding SearchSearchStudents, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Grid.Column="2"
                  Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  Margin="5,5,5,5" 
