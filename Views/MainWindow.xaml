@@ -18,10 +18,11 @@
                                    Command="{Binding UpdateDatabase}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
     <Grid>
-        <TabControl TabIndex="{Binding SelectedTabIndex}" SelectedIndex="{Binding SelectedIndex}">
+        <TabControl Background="{DynamicResource AccentFillColorDefaultBrush}" TabIndex="{Binding SelectedTabIndex}" SelectedIndex="{Binding SelectedIndex}">
             <TabItem Header="Факультеты">
-                <ContentControl Content="{Binding Facultets}" />
+                <ContentControl  Content="{Binding Facultets}" />
             </TabItem>
             <TabItem Header="Кафедры">
                 <ContentControl Content="{Binding  Cafedras}" />

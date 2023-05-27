@@ -26,7 +26,7 @@
             <ColumnDefinition Width="480" />
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
-        <ListBox Margin="0,0,0,10" Background="#00000033" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+        <ListBox VirtualizingPanel.ScrollUnit="Pixel"  Margin="0,0,0,10" Background="#00000033" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
                  ItemsSource="{Binding SearchedStudents}"
                  SelectedItem="{Binding SelectedStudent}">
             <ListBox.ItemTemplate>

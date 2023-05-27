@@ -5,7 +5,6 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-        <PackageIcon>university-icon-10.jpg</PackageIcon>
         <ApplicationIcon>university-icon-10.ico</ApplicationIcon>
     </PropertyGroup>
 
@@ -18,10 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="..\..\..\ХРЕНЬ Д\УНИВЕР\УПИС\university-icon-10.jpg">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
+      <None Include="..\..\..\ХРЕНЬ Д\УНИВЕР\УПИС\university-icon-10.jpg" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,7 +31,6 @@
     <ItemGroup>
       <PackageReference Include="FluentWPF" Version="0.10.2" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.3.23174.2" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.3.23174.8" />
       <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
       <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
     </ItemGroup>
