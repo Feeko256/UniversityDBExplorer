@@ -35,6 +35,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
     public SearchStudentsViewModel()
     {
+        Facultets = new ObservableCollection<FacultetModel>();
         Cafedras = new ObservableCollection<CafedraModel>();
         Groups = new ObservableCollection<GroupModel>();
         Students = new ObservableCollection<StudentModel>();
@@ -164,8 +165,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
     private void NewMethod()
     {
-        Facultets = new ObservableCollection<FacultetModel>(BaseViewModel.Instance.Facultets);
-
+        Facultets.Clear();
         Cafedras.Clear();
         Groups.Clear();
         Students.Clear();
@@ -174,6 +174,11 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         SelectedCafedra = null;
         SelectedGroup = null;
         SelectedStudent = null;
+
+        foreach (var a in BaseViewModel.Instance.Facultets)
+        {
+            Facultets.Add(a);
+        }
 
         foreach (var a in Facultets)
         {
