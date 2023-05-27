@@ -80,7 +80,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                         Students.Add(b);
                     }
                 }
-
+                SearchSearchStudents = "";
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
         }
@@ -114,7 +114,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                         Students.Add(b);
                     }
                 }
-
+                SearchSearchStudents = "";
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
         }
@@ -137,7 +137,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 {
                     Students.Add(a);
                 }
-
+                SearchSearchStudents = "";
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
         }
@@ -166,6 +166,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     private void NewMethod()
     {
         Facultets.Clear();
+        SearchSearchStudents = "";
         Cafedras.Clear();
         Groups.Clear();
         Students.Clear();
