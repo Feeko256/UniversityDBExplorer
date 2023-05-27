@@ -39,16 +39,16 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
     public SearchStudentsViewModel()
     {
-        Facultets = BaseViewModel.Instance.Facultets;
+     /*   Facultets = BaseViewModel.Instance.Facultets;
         Cafedras = new ObservableCollection<CafedraModel>();
         Groups = new ObservableCollection<GroupModel>();
         Students = new ObservableCollection<StudentModel>();
         CafedraComboboxEnabled = true;
         FacultetComboboxEnabled = true;
         GroupComboboxEnabled = true;    
-        SearchedStudents=new ObservableCollection<StudentModel>(Students);
+        SearchedStudents=new ObservableCollection<StudentModel>(Students);*/
         
-        foreach (var a in Facultets)
+      /* foreach (var a in Facultets)
         {
             if (a.Cafedra == null)
                 a.Cafedra = new ObservableCollection<CafedraModel>();
@@ -72,7 +72,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 {
                     Students.Add(b);
                 }
-        }
+        }*/
         NewMethod();
     }
 
@@ -83,7 +83,38 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         {
             selectedFac = value;
             OnPropertyChanged();
-            FilterUpdate();
+            if (SelectedFacultet != null)
+            {
+                Cafedras.Clear();
+                if (SelectedFacultet.Cafedra == null)
+                    SelectedFacultet.Cafedra = new ObservableCollection<CafedraModel>();
+                foreach (var a in SelectedFacultet.Cafedra)
+                {
+                    Cafedras.Add(a);
+                }
+                Groups.Clear();
+                foreach (var a in Cafedras)
+                {
+                    if (a.Groups == null)
+                        a.Groups = new ObservableCollection<GroupModel>();
+                    foreach (var b in a.Groups)
+                    {
+                        Groups.Add(b);
+                    }
+                }
+                Students.Clear();
+                foreach (var a in Groups)
+                {
+                    if (a.Student == null)
+                        a.Student = new ObservableCollection<StudentModel>();
+                    foreach (var b in a.Student)
+                    {
+                        Students.Add(b);
+                    }
+                }
+                SearchedStudents = new ObservableCollection<StudentModel>(Students);
+            }
+
         }
     }
     public CafedraModel SelectedCafedra
@@ -93,7 +124,29 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         {
             selectedCaf = value;
             OnPropertyChanged();
-            FilterUpdate();
+            Groups.Clear();
+            if (SelectedCafedra != null)
+            {
+                Groups.Clear();
+                if (SelectedCafedra.Groups == null)
+                    SelectedCafedra.Groups = new ObservableCollection<GroupModel>();
+                foreach (var a in SelectedCafedra.Groups)
+                {
+                    Groups.Add(a);
+                } 
+                Students.Clear();
+                foreach (var a in Groups)
+                {
+                    if (a.Student == null)
+                        a.Student = new ObservableCollection<StudentModel>();
+                    foreach (var b in a.Student)
+                    {
+                        Students.Add(b);
+                    }
+                }
+                SearchedStudents = new ObservableCollection<StudentModel>(Students);
+            }
+
         }
     }
     public GroupModel SelectedGroup
@@ -103,7 +156,19 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         {
             selectedGrp = value;
             OnPropertyChanged();
-            FilterUpdate();
+          
+            if (SelectedGroup != null)
+            {  
+                Students.Clear();
+                if (SelectedGroup.Student == null)
+                    SelectedGroup.Student = new ObservableCollection<StudentModel>();
+                foreach (var a in SelectedGroup.Student)
+                {
+                    Students.Add(a);
+                }
+                SearchedStudents = new ObservableCollection<StudentModel>(Students);
+            }
+
         }
     }
     public StudentModel SelectedStudent
@@ -145,10 +210,18 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     }
     private void FilterUpdate()
     {
-        if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
+
+
+        
+        
+        
+        
+        
+        
+      /*  if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
         {
-            CafedraComboboxEnabled = false;
-            GroupComboboxEnabled= false;
+          //    CafedraComboboxEnabled = false;
+         //   GroupComboboxEnabled= false;
             if (SelectedFacultet != null)
             {
                 Cafedras.Clear();
@@ -185,8 +258,8 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         }
         if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup == null) 
         {
-            FacultetComboboxEnabled = false;
-            GroupComboboxEnabled = false;
+         //   FacultetComboboxEnabled = false;
+         //   GroupComboboxEnabled = false;
             if (SelectedCafedra != null)
             {
                 if (SelectedCafedra.Groups == null)
@@ -212,8 +285,8 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         }
         if (SelectedFacultet == null && SelectedCafedra == null && SelectedGroup != null) 
         {
-            CafedraComboboxEnabled = false;
-            FacultetComboboxEnabled = false;
+           // CafedraComboboxEnabled = false;
+          //  FacultetComboboxEnabled = false;
             if (SelectedGroup != null)
             {
                 if (SelectedGroup.Student == null)
@@ -226,39 +299,39 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
         } 
-        /*if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup != null)
+        /* if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup != null)
         {
-            if (SelectedGroup != null)
-            {
-                
-                FacultetComboboxEnabled = false;
-                Students.Clear();
-                
+             if (SelectedGroup != null)
+             {
+                 
+                 FacultetComboboxEnabled = false;
+                 //Students.Clear();
+                 //Groups.Clear();
+                 
+                 
+                /* if (SelectedCafedra.Groups == null)
+                 {
+ 
+                     SelectedCafedra.Groups = new ObservableCollection<GroupModel>(SelectedCafedra.Groups);
+                 }*/
+               /* Groups=new ObservableCollection<GroupModel>(SelectedCafedra.Groups);*/
 
-                //Groups.Clear();
-                
-                
-                if (SelectedCafedra.Groups == null)
-                {
-
-                    SelectedCafedra.Groups = new ObservableCollection<GroupModel>();
-                }
-                Groups=new ObservableCollection<GroupModel>();
-
-                foreach (var a in SelectedCafedra.Groups)
+                /*foreach (var a in SelectedCafedra.Groups)
                 {
 
                     Groups.Add(a);
-                }
+                }*/
                 
-                if (SelectedGroup.Student == null)
+               /* if (SelectedGroup.Student == null)
                     SelectedGroup.Student = new ObservableCollection<StudentModel>();
-                foreach (var a in SelectedGroup.Student)
+                Students=new ObservableCollection<StudentModel>(SelectedGroup.Student);*/
+
+              /*  foreach (var a in SelectedGroup.Student)
                 {
                     Students.Add(a);
                 }  
             }
-        } */
+        }*/
     }
     public int IndexResetFac
     {
@@ -300,41 +373,145 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     }
     private void NewMethod()
     {
-        IndexResetFac = -1;
-        IndexResetCaf = -1;
-        IndexResetGrp = -1;
-        Facultets = BaseViewModel.Instance.Facultets;
+        Facultets = new ObservableCollection<FacultetModel>(BaseViewModel.Instance.Facultets);
+        Cafedras = new ObservableCollection<CafedraModel>();
+        Groups = new ObservableCollection<GroupModel>();
+        Students = new ObservableCollection<StudentModel>();
         Cafedras.Clear();
         Groups.Clear();
         Students.Clear();
+
+
+
+
         CafedraComboboxEnabled = true;
         FacultetComboboxEnabled = true;
         GroupComboboxEnabled = true;
-        foreach (var a in Facultets)
+        if (SelectedFacultet == null && SelectedCafedra == null && SelectedGroup == null)
         {
-            if (a.Cafedra != null)
-                foreach (var b in a.Cafedra)
-                {
-                    Cafedras.Add(b);
-                }
+          //  IndexResetFac = -1;
+          //  IndexResetCaf = -1;
+        //    IndexResetGrp = -1;
+        //MessageBox.Show("ничего не выбрано");
+
+            foreach (var a in Facultets)
+            {
+                if (a.Cafedra != null)
+                    foreach (var b in a.Cafedra)
+                    {
+                        Cafedras.Add(b);
+                    }
+            }
+            foreach (var a in Cafedras)
+            {
+                if (a.Groups != null)
+                    foreach (var b in a.Groups)
+                    {
+                        Groups.Add(b);
+                    }
+            }
+            foreach (var a in Groups)
+            {
+                if (a.Student != null)
+                    foreach (var b in a.Student)
+                    {
+                        Students.Add(b);
+                    }
+            }
+            SearchedStudents = new ObservableCollection<StudentModel>(Students);
         }
-        foreach (var a in Cafedras)
+         
+            
+
+           // Cafedras = new ObservableCollection<CafedraModel>(SelectedFacultet.Cafedra);
+        
+
+      /*  else if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
         {
-            if (a.Groups != null)
-                foreach (var b in a.Groups)
+        
+            if (SelectedFacultet.Cafedra != null)
+                foreach (var a in SelectedFacultet.Cafedra)
                 {
-                    Groups.Add(b);
+                    if (a.Groups != null)
+                        foreach (var b in a.Groups)
+                        {
+                            Groups.Add(b);
+                        }
                 }
-        }
-        foreach (var a in Groups)
+
+            foreach (var a in Groups)
+            {
+                if (a.Student != null)
+                    foreach (var b in a.Student)
+                    {
+                        Students.Add(b);
+                    }
+            }
+            CafedraComboboxEnabled = true;
+            SearchedStudents = new ObservableCollection<StudentModel>(Students);
+        }*/
+     /*   else if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup == null)
         {
-            if (a.Student != null)
-                foreach (var b in a.Student)
-                {
-                    Students.Add(b);
-                }
+            foreach (var a in SelectedCafedra.Groups)
+            {
+                if (a.Student != null)
+                    foreach (var b in a.Student)
+                    {
+                        Students.Add(b);
+                    }
+            }
+            SearchedStudents = new ObservableCollection<StudentModel>(Students);
         }
-        SearchedStudents = new ObservableCollection<StudentModel>(Students);
+        else if (SelectedFacultet == null && SelectedCafedra == null && SelectedGroup != null)
+        {
+            foreach (var a in SelectedGroup.Student)
+            {
+                if (a != null)
+                    Students.Add(a);
+            }
+            SearchedStudents = new ObservableCollection<StudentModel>(Students);
+        }*/
+        /*else if (SelectedFacultet != null && SelectedCafedra != null && SelectedGroup != null)
+        {
+            foreach (var a in SelectedFacultet.Cafedra)
+            {
+                if (a != null)
+                    Cafedras.Add(a);
+            }
+
+            foreach (var a in Cafedras)
+            {
+                if(a.Groups!=null)
+                    foreach (var b in a.Groups)
+                    {
+                        Groups.Add(b);
+                    }
+            }
+
+            foreach (var a in Groups)
+            {
+                if(a.Student!=null)
+                    foreach (var b in a.Student)
+                    {
+                        Students.Add(b);
+                    }
+            }
+
+            SearchedStudents = new ObservableCollection<StudentModel>(Students);
+        }*/
+      /*  else if (SelectedFacultet != null && SelectedCafedra != null && SelectedGroup == null)
+        {
+            MessageBox.Show("факультеты и кафедры");
+        }
+        else if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup != null)
+        {
+            MessageBox.Show("факультеты и группы");
+        }
+        else if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup != null)
+        {
+            MessageBox.Show("кафедры и группы");
+        }*/
+        
     }
     public ObservableCollection<StudentModel> SearchedStudents
     {

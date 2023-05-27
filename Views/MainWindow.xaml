@@ -7,7 +7,8 @@
                   xmlns:viewModel="clr-namespace:UniversityDBExplorer.ViewModels"
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                   mc:Ignorable="d"
-                  Height="570" Width="980" MinHeight="570" MinWidth="980" ResizeMode="CanMinimize">
+                  Height="570" Width="980" MinHeight="570" MinWidth="980" ResizeMode="CanResize">
+
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>

@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using Prism.Events;
 using UniversityDBExplorer.Models;
 using UniversityDBExplorer.Special;
 using UniversityDBExplorer.Special.Mediator;
-using UniversityDBExplorer.Views;
 
 namespace UniversityDBExplorer.ViewModels;
 
@@ -79,7 +74,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
                 SearchedFacultets = Facultets;
                 BaseViewModel.db.Facultets.Add(fac);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Facultets = BaseViewModel.db.Facultets.Local.ToObservableCollection();
+                BaseViewModel.Instance.Facultets = Facultets;
             });
         }
     }  

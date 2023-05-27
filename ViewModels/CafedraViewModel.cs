@@ -68,7 +68,7 @@ public class CafedraViewModel : INotifyPropertyChanged
                 SearchedCafedras = facultet.Cafedra;
                 BaseViewModel.db.Cafedras.Add(caf);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Cafedras = BaseViewModel.db.Cafedras.Local.ToObservableCollection(); 
+                BaseViewModel.Instance.Cafedras = Facultet.Cafedra;
             }, obj => Facultet != null);
         }
     }

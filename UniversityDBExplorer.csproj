@@ -21,9 +21,6 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.3.23174.8" />
       <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
       <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
-      <PackageReference Include="Prism.Container.Extensions" Version="8.0.62" />
-      <PackageReference Include="Prism.Core" Version="8.1.97" />
-      <PackageReference Include="Prism.Unity" Version="8.1.97" />
     </ItemGroup>
 
 </Project>

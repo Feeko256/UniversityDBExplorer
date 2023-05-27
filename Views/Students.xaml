@@ -52,7 +52,7 @@
                               TextWrapping="Wrap">
                          <b:Interaction.Triggers>
                              <b:EventTrigger EventName="TextChanged">
-                                 <interactivity:InvokeCommandAction Command="{Binding SearchStdCommand}" />
+                                 <b:InvokeCommandAction Command="{Binding SearchStdCommand}" />
                              </b:EventTrigger>
                          </b:Interaction.Triggers>
                      </TextBox>
