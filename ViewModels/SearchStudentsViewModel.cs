@@ -21,16 +21,12 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     private RelayCommand searchStudCommand;
     private RelayCommand removeStudent;
     private RelayCommand resetFilter;
-    private int indexResetFac = -1;
-    private int indexResetCaf = -1;
-    private int indexResetGrp = -1;
+
     private FacultetModel selectedFac;
     private CafedraModel selectedCaf;
     private GroupModel selectedGrp;
     private StudentModel selectedStd;
-    private bool cafedraComboboxEnabled;
-    private bool facultetComboboxEnabled;
-    private bool groupComboboxEnabled;
+
 
     public ObservableCollection<FacultetModel> Facultets { get; set; }
     public ObservableCollection<StudentModel> Students { get; set; }
@@ -39,41 +35,10 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
     public SearchStudentsViewModel()
     {
-     /*   Facultets = BaseViewModel.Instance.Facultets;
         Cafedras = new ObservableCollection<CafedraModel>();
-        Groups = new ObservableCollection<GroupModel>();
-        Students = new ObservableCollection<StudentModel>();
-        CafedraComboboxEnabled = true;
-        FacultetComboboxEnabled = true;
-        GroupComboboxEnabled = true;    
-        SearchedStudents=new ObservableCollection<StudentModel>(Students);*/
-        
-      /* foreach (var a in Facultets)
-        {
-            if (a.Cafedra == null)
-                a.Cafedra = new ObservableCollection<CafedraModel>();
-            foreach (var b in a.Cafedra)
-            {
-                Cafedras.Add(b);
-            }
-        }
-        foreach (var a in Cafedras)
-        {
-            if (a.Groups != null)
-                foreach (var b in a.Groups)
-                {
-                    Groups.Add(b);
-                }
-        }
-        foreach (var a in Groups)
-        {
-            if (a.Student != null)
-                foreach (var b in a.Student)
-                {
-                    Students.Add(b);
-                }
-        }*/
-        NewMethod();
+      Groups = new ObservableCollection<GroupModel>();
+      Students = new ObservableCollection<StudentModel>();
+      NewMethod();
     }
 
     public FacultetModel SelectedFacultet
@@ -181,185 +146,6 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
         }
     }
-    public bool CafedraComboboxEnabled 
-    {
-        get => cafedraComboboxEnabled;
-        set 
-        {
-            cafedraComboboxEnabled = value;
-            OnPropertyChanged(); 
-        } 
-    }
-    public bool FacultetComboboxEnabled 
-    {
-        get => facultetComboboxEnabled;
-        set
-        { 
-            facultetComboboxEnabled = value;
-            OnPropertyChanged(); 
-        } 
-    }
-    public bool GroupComboboxEnabled 
-    { 
-        get => groupComboboxEnabled;
-        set
-        {
-            groupComboboxEnabled = value;
-            OnPropertyChanged();
-        }
-    }
-    private void FilterUpdate()
-    {
-
-
-        
-        
-        
-        
-        
-        
-      /*  if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
-        {
-          //    CafedraComboboxEnabled = false;
-         //   GroupComboboxEnabled= false;
-            if (SelectedFacultet != null)
-            {
-                Cafedras.Clear();
-                if (SelectedFacultet.Cafedra == null)
-                    SelectedFacultet.Cafedra = new ObservableCollection<CafedraModel>();
-                foreach (var a in SelectedFacultet.Cafedra)
-                {
-                    Cafedras.Add(a);
-                }
-                Groups.Clear();
-                foreach (var a in Cafedras)
-                {
-                    if (a != null)
-                        if (a.Groups == null)
-                            a.Groups = new ObservableCollection<GroupModel>();
-                    foreach (var b in a?.Groups)
-                    {
-                        Groups.Add(b);
-                    }
-                }
-                Students.Clear();
-                foreach (var a in Groups)
-                {
-                    if (a != null)
-                        if (a.Student == null)
-                            a.Student = new ObservableCollection<StudentModel>();
-                    foreach (var b in a?.Student)
-                    {
-                        Students.Add(b);
-                    }
-                }
-                SearchedStudents = new ObservableCollection<StudentModel>(Students);
-            }
-        }
-        if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup == null) 
-        {
-         //   FacultetComboboxEnabled = false;
-         //   GroupComboboxEnabled = false;
-            if (SelectedCafedra != null)
-            {
-                if (SelectedCafedra.Groups == null)
-                    SelectedCafedra.Groups = new ObservableCollection<GroupModel>();
-                Groups.Clear();
-                foreach (var a in SelectedCafedra.Groups)
-                {
-                    Groups.Add(a);
-                }
-                Students.Clear();
-                foreach (var a in Groups)
-                {
-                    if (a != null)
-                        if (a.Student == null)
-                            a.Student = new ObservableCollection<StudentModel>();
-                    foreach (var b in a?.Student)
-                    {
-                        Students.Add(b);  
-                    }
-                }
-                SearchedStudents = new ObservableCollection<StudentModel>(Students);
-            }
-        }
-        if (SelectedFacultet == null && SelectedCafedra == null && SelectedGroup != null) 
-        {
-           // CafedraComboboxEnabled = false;
-          //  FacultetComboboxEnabled = false;
-            if (SelectedGroup != null)
-            {
-                if (SelectedGroup.Student == null)
-                    SelectedGroup.Student= new ObservableCollection<StudentModel>();
-                Students.Clear();
-                foreach (var a in SelectedGroup.Student)
-                {
-                    Students.Add(a);
-                }
-                SearchedStudents = new ObservableCollection<StudentModel>(Students);
-            }
-        } 
-        /* if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup != null)
-        {
-             if (SelectedGroup != null)
-             {
-                 
-                 FacultetComboboxEnabled = false;
-                 //Students.Clear();
-                 //Groups.Clear();
-                 
-                 
-                /* if (SelectedCafedra.Groups == null)
-                 {
- 
-                     SelectedCafedra.Groups = new ObservableCollection<GroupModel>(SelectedCafedra.Groups);
-                 }*/
-               /* Groups=new ObservableCollection<GroupModel>(SelectedCafedra.Groups);*/
-
-                /*foreach (var a in SelectedCafedra.Groups)
-                {
-
-                    Groups.Add(a);
-                }*/
-                
-               /* if (SelectedGroup.Student == null)
-                    SelectedGroup.Student = new ObservableCollection<StudentModel>();
-                Students=new ObservableCollection<StudentModel>(SelectedGroup.Student);*/
-
-              /*  foreach (var a in SelectedGroup.Student)
-                {
-                    Students.Add(a);
-                }  
-            }
-        }*/
-    }
-    public int IndexResetFac
-    {
-        get => indexResetFac;
-        set
-        {
-            indexResetFac = value;
-            OnPropertyChanged("indexResetFac");
-        }
-    }
-    public int IndexResetCaf
-    {
-        get => indexResetCaf;
-        set
-        {
-            indexResetCaf = value;
-            OnPropertyChanged("indexResetCaf");
-        }
-    }
-    public int IndexResetGrp
-    {
-        get => indexResetGrp;
-        set
-        {
-            indexResetGrp = value;
-            OnPropertyChanged("indexResetGrp");
-        }
-    }
     public RelayCommand ResetFilter
     {
         get
@@ -367,89 +153,80 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return resetFilter ??= new RelayCommand(obj =>
             {
-                NewMethod();
-            }/*, (obj) => (IndexResetFac != -1 || IndexResetCaf != -1 || IndexResetGrp != -1)*/);
+                 NewMethod();
+            });
         }
     }
     private void NewMethod()
     {
+        
         Facultets = new ObservableCollection<FacultetModel>(BaseViewModel.Instance.Facultets);
-        Cafedras = new ObservableCollection<CafedraModel>();
-        Groups = new ObservableCollection<GroupModel>();
-        Students = new ObservableCollection<StudentModel>();
+
         Cafedras.Clear();
         Groups.Clear();
         Students.Clear();
-
-
-
-
-        CafedraComboboxEnabled = true;
-        FacultetComboboxEnabled = true;
-        GroupComboboxEnabled = true;
-        if (SelectedFacultet == null && SelectedCafedra == null && SelectedGroup == null)
-        {
-          //  IndexResetFac = -1;
-          //  IndexResetCaf = -1;
-        //    IndexResetGrp = -1;
-        //MessageBox.Show("ничего не выбрано");
-
-            foreach (var a in Facultets)
-            {
-                if (a.Cafedra != null)
-                    foreach (var b in a.Cafedra)
-                    {
-                        Cafedras.Add(b);
-                    }
-            }
-            foreach (var a in Cafedras)
-            {
-                if (a.Groups != null)
-                    foreach (var b in a.Groups)
-                    {
-                        Groups.Add(b);
-                    }
-            }
-            foreach (var a in Groups)
-            {
-                if (a.Student != null)
-                    foreach (var b in a.Student)
-                    {
-                        Students.Add(b);
-                    }
-            }
-            SearchedStudents = new ObservableCollection<StudentModel>(Students);
-        }
-         
-            
-
-           // Cafedras = new ObservableCollection<CafedraModel>(SelectedFacultet.Cafedra);
         
+         SelectedFacultet = null;
+         SelectedCafedra = null;
+         SelectedGroup = null;
+         SelectedStudent = null;
 
-      /*  else if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
-        {
-        
-            if (SelectedFacultet.Cafedra != null)
-                foreach (var a in SelectedFacultet.Cafedra)
-                {
-                    if (a.Groups != null)
-                        foreach (var b in a.Groups)
-                        {
-                            Groups.Add(b);
-                        }
-                }
+         foreach (var a in Facultets)
+     {
+         if (a.Cafedra != null)
+             foreach (var b in a.Cafedra)
+             {
+                 Cafedras.Add(b);
+             }
+     }
+     foreach (var a in Cafedras)
+     {
+         if (a.Groups != null)
+             foreach (var b in a.Groups)
+             {
+                 Groups.Add(b);
+             }
+     }
+     foreach (var a in Groups)
+     {
+         if (a.Student != null)
+             foreach (var b in a.Student)
+             {
+                 Students.Add(b);
+             }
+     }
+     SearchedStudents = new ObservableCollection<StudentModel>(Students);
+// }
+  
+     
 
-            foreach (var a in Groups)
-            {
-                if (a.Student != null)
-                    foreach (var b in a.Student)
-                    {
-                        Students.Add(b);
-                    }
-            }
-            CafedraComboboxEnabled = true;
-            SearchedStudents = new ObservableCollection<StudentModel>(Students);
-        }*/
+    // Cafedras = new ObservableCollection<CafedraModel>(SelectedFacultet.Cafedra);
+ 
+
+/*  else if (SelectedFacultet != null && SelectedCafedra == null && SelectedGroup == null)
+ {
+ 
+     if (SelectedFacultet.Cafedra != null)
+         foreach (var a in SelectedFacultet.Cafedra)
+         {
+             if (a.Groups != null)
+                 foreach (var b in a.Groups)
+                 {
+                     Groups.Add(b);
+                 }
+         }
+
+     foreach (var a in Groups)
+     {
+         if (a.Student != null)
+             foreach (var b in a.Student)
+             {
+                 Students.Add(b);
+             }
+     }
+     CafedraComboboxEnabled = true;
+     SearchedStudents = new ObservableCollection<StudentModel>(Students);
+ }*/
      /*   else if (SelectedFacultet == null && SelectedCafedra != null && SelectedGroup == null)
         {
             foreach (var a in SelectedCafedra.Groups)

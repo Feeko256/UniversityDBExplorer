@@ -42,9 +42,7 @@
                   SelectedItem="{Binding SelectedFacultet}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  ui:ControlHelper.PlaceholderText="Факультеты"
-                  SelectedIndex="{Binding IndexResetFac}"
-                  IsEnabled="{Binding FacultetComboboxEnabled}">
+                  ui:ControlHelper.PlaceholderText="Факультеты">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -57,9 +55,7 @@
                   SelectedItem="{Binding SelectedCafedra}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  ui:ControlHelper.PlaceholderText="Кафедры"
-                  SelectedIndex="{Binding IndexResetCaf}"
-                  IsEnabled="{Binding CafedraComboboxEnabled}">
+                  ui:ControlHelper.PlaceholderText="Кафедры">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -72,9 +68,7 @@
                   SelectedItem="{Binding SelectedGroup}"
                   Margin="5,5,5,5"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  ui:ControlHelper.PlaceholderText="Группы"
-                  SelectedIndex="{Binding IndexResetGrp}"
-                  IsEnabled="{Binding GroupComboboxEnabled}">
+                  ui:ControlHelper.PlaceholderText="Группы">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
