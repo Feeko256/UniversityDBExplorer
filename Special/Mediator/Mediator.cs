@@ -8,6 +8,7 @@ namespace UniversityDBExplorer.Special.Mediator;
 public class Mediator
 {
     public event Action<FacultetModel> FacultetChange;
+    public event Action<ObservableCollection<FacultetModel>> FacultetListChange;
     public event Action<CafedraModel> CafedraChange;
     public event Action<GroupModel> GroupChange;
     public event Action<StudentModel> StudentChange;
@@ -18,6 +19,10 @@ public class Mediator
     {
         FacultetChange?.Invoke(facultet);
     }
+    public void OnFacultetSearchChanged(ObservableCollection<FacultetModel> facultet)
+    {
+        FacultetListChange?.Invoke(facultet);
+    } 
     public void OnCafedraChange(CafedraModel cafedra)
     {
         CafedraChange?.Invoke(cafedra);
