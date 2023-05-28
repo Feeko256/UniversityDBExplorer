@@ -27,15 +27,21 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     private GroupModel selectedGrp;
     private StudentModel selectedStd;
 
+    private Mediator mediator;
 
     public ObservableCollection<FacultetModel> Facultets { get; set; }
     public ObservableCollection<StudentModel> Students { get; set; }
     public ObservableCollection<GroupModel> Groups { get; set; }
     public ObservableCollection<CafedraModel> Cafedras { get; set; }
-
-    public SearchStudentsViewModel()
+    private void OnFacultetListChanged(ObservableCollection<FacultetModel> facultets)
     {
-        Facultets = new ObservableCollection<FacultetModel>();
+        Facultets = facultets;
+    }
+    public SearchStudentsViewModel(Mediator mediator)
+    {
+        this.mediator = mediator;
+
+
         Cafedras = new ObservableCollection<CafedraModel>();
         Groups = new ObservableCollection<GroupModel>();
         Students = new ObservableCollection<StudentModel>();
@@ -165,7 +171,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
 
     private void NewMethod()
     {
-        Facultets.Clear();
+       // Facultets.Clear();
         SearchSearchStudents = "";
         Cafedras.Clear();
         Groups.Clear();
@@ -176,11 +182,12 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         SelectedGroup = null;
         SelectedStudent = null;
 
-        foreach (var a in BaseViewModel.Instance.Facultets)
+      /*  foreach (var a in BaseViewModel.Instance.Facultets)
         {
             Facultets.Add(a);
-        }
-
+        }*/
+      mediator.FacultetListChange += OnFacultetListChanged;
+      mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
         foreach (var a in Facultets)
         {
             if (a.Cafedra != null)

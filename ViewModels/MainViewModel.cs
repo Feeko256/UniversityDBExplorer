@@ -79,7 +79,7 @@ namespace UniversityDBExplorer.ViewModels
            };
            StudentSearch = new StudentsSearch()
            {
-               DataContext = SearchStudentsViewModel = new SearchStudentsViewModel()
+               DataContext = SearchStudentsViewModel = new SearchStudentsViewModel(mediator)
            };
        }
        public event PropertyChangedEventHandler? PropertyChanged;

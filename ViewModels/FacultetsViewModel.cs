@@ -74,7 +74,7 @@ public class FacultetsViewModel : INotifyPropertyChanged
                 SearchedFacultets = Facultets;
                 BaseViewModel.db.Facultets.Add(fac);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Facultets = Facultets;
+                mediator.OnFacultetListChanged(Facultets);
             });
         }
     }  

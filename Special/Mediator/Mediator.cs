@@ -19,7 +19,7 @@ public class Mediator
     {
         FacultetChange?.Invoke(facultet);
     }
-    public void OnFacultetSearchChanged(ObservableCollection<FacultetModel> facultet)
+    public void OnFacultetListChanged(ObservableCollection<FacultetModel> facultet)
     {
         FacultetListChange?.Invoke(facultet);
     } 
