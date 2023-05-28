@@ -63,7 +63,7 @@ public class StudentsViewModel : INotifyPropertyChanged
                 SearchedStudents = group.Student;
                 BaseViewModel.db.Students.Add(st);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Students = Group.Student;
+                mediator.OnStudentListChanged(Group.Student);
             }, obj=>group!=null);
         }
     }

@@ -37,15 +37,23 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     {
         Facultets = facultets;
     }
+    private void OnCafedraListChanged(ObservableCollection<CafedraModel> cafedras)
+    {
+        Cafedras = cafedras;
+    }
+    private void OnGroupListChanged(ObservableCollection<GroupModel> groups)
+    {
+        Groups = groups;
+    }
+    private void OnStudentListChanged(ObservableCollection<StudentModel> students)
+    {
+        Students = students;
+        SearchedStudents = new ObservableCollection<StudentModel>(Students);
+    }
     public SearchStudentsViewModel(Mediator mediator)
     {
         this.mediator = mediator;
-
-
-        Cafedras = new ObservableCollection<CafedraModel>();
-        Groups = new ObservableCollection<GroupModel>();
-        Students = new ObservableCollection<StudentModel>();
-        NewMethod();
+        Update();
     }
 
     public FacultetModel SelectedFacultet
@@ -99,7 +107,6 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
         {
             selectedCaf = value;
             OnPropertyChanged();
-            Groups.Clear();
             if (SelectedCafedra != null)
             {
                 Groups.Clear();
@@ -163,59 +170,31 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     {
         get
         {
-            NewMethod();
+            Update();
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
-            return resetFilter ??= new RelayCommand(obj => { NewMethod(); });
+            return resetFilter ??= new RelayCommand(obj => { Update(); });
         }
     }
 
-    private void NewMethod()
+    private void Update()
     {
-       // Facultets.Clear();
         SearchSearchStudents = "";
-        Cafedras.Clear();
-        Groups.Clear();
-        Students.Clear();
-
         SelectedFacultet = null;
         SelectedCafedra = null;
         SelectedGroup = null;
         SelectedStudent = null;
+       
+        mediator.FacultetListChange += OnFacultetListChanged;
+        mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
 
-      /*  foreach (var a in BaseViewModel.Instance.Facultets)
-        {
-            Facultets.Add(a);
-        }*/
-      mediator.FacultetListChange += OnFacultetListChanged;
-      mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
-        foreach (var a in Facultets)
-        {
-            if (a.Cafedra != null)
-                foreach (var b in a.Cafedra)
-                {
-                    Cafedras.Add(b);
-                }
-        }
+        mediator.CafedraListChange += OnCafedraListChanged;
+        mediator.OnCafedraListChanged(BaseViewModel.Instance.Cafedras);
 
-        foreach (var a in Cafedras)
-        {
-            if (a.Groups != null)
-                foreach (var b in a.Groups)
-                {
-                    Groups.Add(b);
-                }
-        }
+        mediator.GroupListChange += OnGroupListChanged;
+        mediator.OnGroupListChanged(BaseViewModel.Instance.Groups);
 
-        foreach (var a in Groups)
-        {
-            if (a.Student != null)
-                foreach (var b in a.Student)
-                {
-                    Students.Add(b);
-                }
-        }
-
-        SearchedStudents = new ObservableCollection<StudentModel>(Students);
+        mediator.StudentListChange += OnStudentListChanged;
+        mediator.OnStudentListChanged(BaseViewModel.Instance.Students);
     }
 
     public ObservableCollection<StudentModel> SearchedStudents

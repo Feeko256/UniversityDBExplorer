@@ -70,7 +70,7 @@ public class GroupsViewModel : INotifyPropertyChanged
                 SearchedGroups = cafedra.Groups;
                 BaseViewModel.db.Groups.Add(gr);
                 BaseViewModel.db.SaveChanges();
-                BaseViewModel.Instance.Groups = Cafedra.Groups;
+                mediator.OnGroupListChanged(Cafedra.Groups);
             }, obj => Cafedra != null);
         }
     }

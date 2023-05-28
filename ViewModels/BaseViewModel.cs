@@ -30,7 +30,6 @@ public class BaseViewModel
     }
     static BaseViewModel()
     {
-
         db.Database.EnsureCreated();
         db.Facultets.Load();
         db.Cafedras.Load();
@@ -40,13 +39,5 @@ public class BaseViewModel
         Instance.Students = db.Students.Local.ToObservableCollection(); 
         Instance.Cafedras = db.Cafedras.Local.ToObservableCollection();
         Instance.Groups = db.Groups.Local.ToObservableCollection();
-
-       // var c1 = new CafedraModel { Title = "ass" };
-      ///  var c2 = new CafedraModel { Title = "ass2" };
-    //    Cafedras.Add(c1);
-        //Cafedras.Add(c2);
-    //   db.Cafedras.Add(c1);
-      //  db.Cafedras.Add(c2);
-        //db.SaveChanges();
     }
 }
