@@ -33,23 +33,28 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     public ObservableCollection<StudentModel> Students { get; set; }
     public ObservableCollection<GroupModel> Groups { get; set; }
     public ObservableCollection<CafedraModel> Cafedras { get; set; }
+
     private void OnFacultetListChanged(ObservableCollection<FacultetModel> facultets)
     {
         Facultets = facultets;
     }
+
     private void OnCafedraListChanged(ObservableCollection<CafedraModel> cafedras)
     {
         Cafedras = cafedras;
     }
+
     private void OnGroupListChanged(ObservableCollection<GroupModel> groups)
     {
         Groups = groups;
     }
+
     private void OnStudentListChanged(ObservableCollection<StudentModel> students)
     {
         Students = students;
         SearchedStudents = new ObservableCollection<StudentModel>(Students);
     }
+
     public SearchStudentsViewModel(Mediator mediator)
     {
         this.mediator = mediator;
@@ -94,6 +99,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                         Students.Add(b);
                     }
                 }
+
                 SearchSearchStudents = "";
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
@@ -127,6 +133,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                         Students.Add(b);
                     }
                 }
+
                 SearchSearchStudents = "";
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
@@ -150,6 +157,7 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
                 {
                     Students.Add(a);
                 }
+
                 SearchSearchStudents = "";
                 SearchedStudents = new ObservableCollection<StudentModel>(Students);
             }
@@ -170,31 +178,97 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
     {
         get
         {
-            Update();
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
-            return resetFilter ??= new RelayCommand(obj => { Update(); });
+            return resetFilter ??= new RelayCommand(obj =>
+            {
+                Update();
+            });
         }
     }
 
     private void Update()
     {
         SearchSearchStudents = "";
-        SelectedFacultet = null;
-        SelectedCafedra = null;
-        SelectedGroup = null;
-        SelectedStudent = null;
-       
-        mediator.FacultetListChange += OnFacultetListChanged;
-        mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
+        //  SelectedFacultet = null;
+        //  SelectedCafedra = null;
+        //    SelectedGroup = null;
+        //  SelectedStudent = null;
 
+
+        if (Facultets == null)
+            Facultets = new ObservableCollection<FacultetModel>();
+        if (Cafedras == null)
+            Cafedras = new ObservableCollection<CafedraModel>();
+        if (Groups == null)
+            Groups = new ObservableCollection<GroupModel>();
+        if (Students == null)
+            Students = new ObservableCollection<StudentModel>();
+        
+       if (Facultets != null)
+        {
+            Facultets.Clear();
+        }
+
+        foreach (var a in BaseViewModel.db.Facultets.Local.ToObservableCollection())
+        {
+            Facultets.Add(a);
+        }
+
+
+        if (Cafedras != null)
+        {
+            Cafedras.Clear();
+        }
+
+        foreach (var a in BaseViewModel.db.Cafedras.Local.ToObservableCollection())
+        {
+            Cafedras.Add(a);
+        }
+
+
+        if (Groups != null)
+        {
+            Groups.Clear();
+        }
+
+        foreach (var a in BaseViewModel.db.Groups.Local.ToObservableCollection())
+        {
+            Groups.Add(a);
+        }
+
+
+        if (Students != null)
+        {
+            Students.Clear();
+        }
+
+        foreach (var a in BaseViewModel.db.Students.Local.ToObservableCollection())
+        {
+            Students.Add(a);
+        }
+        
+
+        //  Facultets = new ObservableCollection<FacultetModel>(BaseViewModel.db.Facultets.Local.ToObservableCollection());
+        //   Cafedras = new ObservableCollection<CafedraModel>(BaseViewModel.db.Cafedras.Local.ToObservableCollection());
+        // Groups = new ObservableCollection<GroupModel>(BaseViewModel.db.Groups.Local.ToObservableCollection());
+        //  Students = new ObservableCollection<StudentModel>(BaseViewModel.db.Students.Local.ToObservableCollection());
+        
+      /*  mediator.FacultetListChange += OnFacultetListChanged;
         mediator.CafedraListChange += OnCafedraListChanged;
-        mediator.OnCafedraListChanged(BaseViewModel.Instance.Cafedras);
-
-        mediator.GroupListChange += OnGroupListChanged;
-        mediator.OnGroupListChanged(BaseViewModel.Instance.Groups);
-
+        mediator.GroupListChange += OnGroupListChanged; 
         mediator.StudentListChange += OnStudentListChanged;
-        mediator.OnStudentListChanged(BaseViewModel.Instance.Students);
+        
+        if(Facultets != null)
+          mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
+    
+        if(Cafedras != null)
+             mediator.OnCafedraListChanged(BaseViewModel.Instance.Cafedras);
+        if(Groups != null)
+             
+             mediator.OnGroupListChanged(BaseViewModel.Instance.Groups);
+     
+        if(Students != null)
+             mediator.OnStudentListChanged(BaseViewModel.Instance.Students);*/
     }
 
     public ObservableCollection<StudentModel> SearchedStudents
