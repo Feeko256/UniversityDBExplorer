@@ -203,6 +203,8 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             Groups = new ObservableCollection<GroupModel>();
         if (Students == null)
             Students = new ObservableCollection<StudentModel>();
+        if (SearchedStudents == null)
+            SearchedStudents = new ObservableCollection<StudentModel>();
         
        if (Facultets != null)
         {
@@ -247,28 +249,38 @@ public class SearchStudentsViewModel : INotifyPropertyChanged
             Students.Add(a);
         }
         
+        if (SearchedStudents != null)
+        {
+            SearchedStudents.Clear();
+        }
+        
+        foreach (var a in BaseViewModel.db.Students.Local.ToObservableCollection())
+        {
+            SearchedStudents.Add(a);
+        }
+
 
         //  Facultets = new ObservableCollection<FacultetModel>(BaseViewModel.db.Facultets.Local.ToObservableCollection());
         //   Cafedras = new ObservableCollection<CafedraModel>(BaseViewModel.db.Cafedras.Local.ToObservableCollection());
         // Groups = new ObservableCollection<GroupModel>(BaseViewModel.db.Groups.Local.ToObservableCollection());
         //  Students = new ObservableCollection<StudentModel>(BaseViewModel.db.Students.Local.ToObservableCollection());
-        
-      /*  mediator.FacultetListChange += OnFacultetListChanged;
-        mediator.CafedraListChange += OnCafedraListChanged;
-        mediator.GroupListChange += OnGroupListChanged; 
-        mediator.StudentListChange += OnStudentListChanged;
-        
-        if(Facultets != null)
-          mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
-    
-        if(Cafedras != null)
-             mediator.OnCafedraListChanged(BaseViewModel.Instance.Cafedras);
-        if(Groups != null)
-             
-             mediator.OnGroupListChanged(BaseViewModel.Instance.Groups);
-     
-        if(Students != null)
-             mediator.OnStudentListChanged(BaseViewModel.Instance.Students);*/
+
+        /*  mediator.FacultetListChange += OnFacultetListChanged;
+          mediator.CafedraListChange += OnCafedraListChanged;
+          mediator.GroupListChange += OnGroupListChanged; 
+          mediator.StudentListChange += OnStudentListChanged;
+          
+          if(Facultets != null)
+            mediator.OnFacultetListChanged(BaseViewModel.Instance.Facultets);
+      
+          if(Cafedras != null)
+               mediator.OnCafedraListChanged(BaseViewModel.Instance.Cafedras);
+          if(Groups != null)
+               
+               mediator.OnGroupListChanged(BaseViewModel.Instance.Groups);
+       
+          if(Students != null)
+               mediator.OnStudentListChanged(BaseViewModel.Instance.Students);*/
     }
 
     public ObservableCollection<StudentModel> SearchedStudents
