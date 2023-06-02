@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:interactivity="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:UniversityDBExplorer.ViewModels"
@@ -53,7 +54,8 @@
                 Margin="10,10,10,10" />
         <TextBox BorderBrush="White" Margin="10,10,10,0" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
                  Text="{Binding SearchGroups, UpdateSourceTrigger= PropertyChanged}"
-                 TextWrapping="Wrap">
+                 TextWrapping="Wrap"
+                 ui:ControlHelper.PlaceholderText="Поиск группы">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="TextChanged">
                     <b:InvokeCommandAction Command="{Binding SearchGrpCommand}" />
@@ -140,12 +142,14 @@
                              DataContext="{Binding SelectedGroup}"
                              Text="{Binding GroupNumber, UpdateSourceTrigger=PropertyChanged}"
                              TextWrapping="Wrap" Width="220" Height="35"
-                             HorizontalAlignment="Stretch" />
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.PlaceholderText="Номер группы"/>
                     <ComboBox ItemsSource="{Binding SelectedGroup.Student}"
                               SelectedItem="{Binding SelectedStarosta}"
                               SelectedValue="{Binding SelectedGroup.Starosta}"
                               Margin="5,15,5,5"
-                              Width="220" Height="35" HorizontalAlignment="Stretch">
+                              Width="220" Height="35" HorizontalAlignment="Stretch"
+                              ui:ControlHelper.PlaceholderText="Выбор старосты">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -158,12 +162,14 @@
                              DataContext="{Binding SelectedGroup}"
                              Text="{Binding Starosta.Mail, UpdateSourceTrigger=PropertyChanged}"
                              TextWrapping="Wrap" Width="220" Height="35"
-                             HorizontalAlignment="Stretch" />
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.PlaceholderText="etu@etu.ru"/>
                     <TextBox BorderBrush="White" Margin="5,5,5,5"
                              DataContext="{Binding SelectedGroup}"
                              Text="{Binding Starosta.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
                              TextWrapping="Wrap" Width="220" Height="35"
-                             HorizontalAlignment="Stretch" />
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.PlaceholderText="89211112233"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

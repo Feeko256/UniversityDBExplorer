@@ -54,7 +54,8 @@
                 HorizontalAlignment="Stretch" Margin="10,10,10,10" />
         <TextBox BorderBrush="White" Margin="10,10,10,0" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
                  Text="{Binding SearchFacultets, UpdateSourceTrigger= PropertyChanged}"
-                 TextWrapping="Wrap">
+                 TextWrapping="Wrap"
+                 ui:ControlHelper.PlaceholderText="Поиск факультета">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="TextChanged">
                     <b:InvokeCommandAction Command="{Binding SearchFacCommand}" />

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:UniversityDBExplorer.Views"
              xmlns:viewModels="clr-namespace:UniversityDBExplorer.ViewModels"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:interactivity="http://prismlibrary.com/"
              mc:Ignorable="d" 
@@ -49,7 +50,8 @@
                      <Button Command="{Binding RemoveStudent}" CommandParameter="{Binding SelectedStudent}" Content="Удалить студента" Grid.Row="3" Grid.Column="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10,10,10"/>
                      <TextBox BorderBrush="White" Margin="10,10,10,0" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
                               Text="{Binding SearchStudents, UpdateSourceTrigger= PropertyChanged}"
-                              TextWrapping="Wrap">
+                              TextWrapping="Wrap"
+                              ui:ControlHelper.PlaceholderText="Поиск студента">
                          <b:Interaction.Triggers>
                              <b:EventTrigger EventName="TextChanged">
                                  <b:InvokeCommandAction Command="{Binding SearchStdCommand}" />
@@ -172,33 +174,40 @@
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                           TextWrapping="Wrap" Width="220" Height="35"
-                                          HorizontalAlignment="Stretch" />
+                                          HorizontalAlignment="Stretch"
+                                          ui:ControlHelper.PlaceholderText="ФИО студента"/>
                                  <TextBox BorderBrush="White" Margin="5,15,5,5"
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding StudBiletNumber, UpdateSourceTrigger=PropertyChanged}"
-                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                          TextWrapping="Wrap" Width="220" Height="35" 
+                                          ui:ControlHelper.PlaceholderText="Номер студбилета"/>
                                  <TextBox BorderBrush="White" Margin="5,0,5,5"
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"
-                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                          TextWrapping="Wrap" Width="220" Height="35"
+                                          ui:ControlHelper.PlaceholderText="Местоположение"/>
                                  <TextBox BorderBrush="White" Margin="5,0,5,5"
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
-                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                          TextWrapping="Wrap" Width="220" Height="35" 
+                                          ui:ControlHelper.PlaceholderText="Статус успеваемости"/>
                                  <TextBox BorderBrush="White" Margin="5,0,5,5"
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding Flu, UpdateSourceTrigger=PropertyChanged}"
-                                          TextWrapping="Wrap" Width="220" Height="35" />
+                                          TextWrapping="Wrap" Width="220" Height="35"
+                                          ui:ControlHelper.PlaceholderText="флюорография"/>
                                  <TextBox BorderBrush="White" Margin="5,15,5,5"
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}"
                                           TextWrapping="Wrap" Width="220" Height="35"
-                                          HorizontalAlignment="Stretch" />
+                                          HorizontalAlignment="Stretch" 
+                                          ui:ControlHelper.PlaceholderText="etu@etu.ru"/>
                                  <TextBox BorderBrush="White" Margin="5,0,5,5"
                                           DataContext="{Binding SelectedStudent}"
                                           Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
                                           TextWrapping="Wrap" Width="220" Height="35"
-                                          HorizontalAlignment="Stretch" />
+                                          HorizontalAlignment="Stretch" 
+                                          ui:ControlHelper.PlaceholderText="89211112233"/>
                              </StackPanel>
                          </StackPanel>
                      </StackPanel>
